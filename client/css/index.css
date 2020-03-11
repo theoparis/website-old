@@ -1,0 +1,17 @@
+body {
+    background-color: #acafac;
+    color: white;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    height: 100px;
+    margin-bottom: 50px;
+    background-color: #00a2ff;
+}
+
+.navbar-brand {
+    padding-top: 25px;
+}
