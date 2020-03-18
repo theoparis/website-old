@@ -1,0 +1,134 @@
+body {
+    background-color: #acafac;
+    color: white;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navbar-brand {
+    padding-top: 25px;
+}
+
+
+/* Header */
+
+header {
+    z-index: 1;
+    background-color: #0099cc;
+    color: #ffffff;
+    overflow: hidden;
+    background-size: cover;
+    margin: 0;
+    margin-bottom: 20px;
+    top: 0;
+    left: 0;
+    position: relative;
+    height: auto;
+    min-height: 120px;
+    /* position: fixed;  */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: #ff3300 5px solid;
+}
+
+#about-me {
+    text-align: center;
+    position: relative;
+    height: auto;
+    /* Flex  */
+    display: flex;
+    justify-content: center;
+}
+
+#about-me p {
+    max-width: 400px;
+    display: inline-block;
+}
+
+#cody {
+    height: auto;
+    width: 175px;
+}
+
+#theo {
+    height: auto;
+    width: 175px;
+    /* float: left; */
+}
+
+header nav ul a {
+    color: #cc00cc;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navlink {
+    margin-bottom: 10px;
+}
+
+header nav ul a:hover {
+    color: #660066;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 22.5px;
+    font-weight: bold;
+}
+
+header nav ul a:active {
+    color: #000066;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 22.5px;
+    font-weight: bold;
+}
+
+header ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+header li {
+    padding: 0 20px 0 20px;
+    /* border-right: 4px solid #ffffff; */
+    text-align: center;
+    list-style-type: none;
+}
+
+#branding a {
+    position: relative;
+}
+
+#branding a h1 {
+    color: #cc00cc;
+    font-weight: bold;
+    text-align: center;
+    font-size: 38px;
+}
+
+header nav {
+    padding-right: 15px;
+    position: relative;
+}
+
+.navbar-toggler {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+    #theo {
+        /* transform: scale(50%); */
+        width: 125px;
+    }
+    #cody {
+        width: 125px;
+    }
+}

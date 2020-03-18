@@ -1,0 +1,30 @@
+{
+    "name": "server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "compile": "tsc && node dist/index.js",
+        "start": "npm run compile",
+        "dev": "nodemon -e * --watch public/** --watch src/** --exec \"npm run compile\""
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@types/cors": "^2.8.6",
+        "@types/express": "^4.17.3",
+        "@types/express-session": "^1.17.0",
+        "@types/monk": "^6.0.0",
+        "@types/node": "^13.9.0",
+        "bcrypt": "^4.0.1",
+        "cors": "^2.8.5",
+        "ejs": "^3.0.1",
+        "express": "^4.17.1",
+        "express-session": "^1.17.0",
+        "monk": "^7.1.2",
+        "nodemon": "^2.0.2",
+        "swig": "^1.4.2",
+        "typescript": "^3.8.3"
+    }
+}
