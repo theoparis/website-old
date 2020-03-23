@@ -4,7 +4,7 @@ $('#delete-post').on('submit', async(e) => {
     let postContent = $('#content').val();
     let post = { title: postTitle };
     // Test for connecting to server
-    let response = await fetch("/blog/api/admin/deletePost", {
+    let response = await fetch("https://blog.creepinson.xyz/api/admin/deletePost", {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json;charset=utf-8'

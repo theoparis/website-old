@@ -4,7 +4,7 @@ $('#create-post').on('submit', async (e) => {
     let postContent = $('#content').val();
     let post = { title: postTitle, content: postContent };
     // Test for connecting to server
-    let response = await fetch("/blog/api/admin/createPost", {
+    let response = await fetch("https://blog.creepinson.xyz/api/admin/createPost", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
