@@ -55,7 +55,7 @@ app.use('/toe', throwOutErrorRouter)
 app.use('/blog', blogRouter)
 app.get('/projects', async (req, res) => {
   res.render('projects/index', {
-    projectsCompleted: (await projects.find({ completed: true })).lengt,
+    projectsCompleted: (await projects.find({ completed: true })).length,
     projectsWorkedOn: (await projects.find({})).length,
   })
 })
