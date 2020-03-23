@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Home -->
+
+  <head>
+    <%- include("../components/scripts") %>
+    <title>Home</title>
+  </head>
+
+  <body>
+    <%- include("../components/header") %>
+    <div class="container">
+      <div class="border-panel card mt-4">
+        <div class="card-body card-title">
+          <h2 class="card-title">Projects</h2>
+          <div class="card-text">
+            <p>
+              <%= projectsWorkedOn %> Projects
+            </p>
+            <p>
+              <%= projectsCompleted %> Completed
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="boxes">
+      <div class="box">
+        <!-- <img src="{{ box.iconUrl }}"> -->
+        <h3>Project 1</h3>
+        <p>
+          
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <p>Made By Creepinson</p>
+    </footer>
+  </body>
+</html>

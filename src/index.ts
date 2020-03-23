@@ -11,7 +11,7 @@ import vhost from 'vhost-ts'
 import https from 'https'
 import cookieSession from 'cookie-session'
 
-import { posts } from './config'
+import { projects } from './config'
 import { authRouter } from './routes/auth'
 import { blogRouter } from './routes/blog/blog'
 
@@ -53,6 +53,12 @@ app.use(vhost('throw-out-error.dev', throwOutErrorRouter))
 // ----------
 app.use('/toe', throwOutErrorRouter)
 app.use('/blog', blogRouter)
+app.get('/projects', async (req, res) => {
+  res.render('projects/index', {
+    projectsCompleted: (await projects.find({ completed: true })).lengt,
+    projectsWorkedOn: (await projects.find({})).length,
+  })
+})
 
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, '..', 'public'))
