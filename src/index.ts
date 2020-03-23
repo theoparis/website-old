@@ -29,7 +29,7 @@ app.use(
     resave: true,
     saveUninitialized: false,
     cookie: {
-      domain: '.creepinson.xyz',
+      domain: 'creepinson.xyz',
       maxAge: 86400000, // one day
       httpOnly: false,
     },
