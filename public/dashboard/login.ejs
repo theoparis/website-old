@@ -1,30 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Blog Index -->
+    <!-- Blog Index -->
 
-<head>
-    <%- include("../components/scripts") %>
+    <head>
+        <%- include("../components/scripts") %>
         <title>Dashboard - Login</title>
-</head>
+    </head>
 
-<body>
-    <%- include("../components/header") %>
-        <div class="container">
+    <body>
+        <%- include("../components/header") %>
+        <main class="container">
             <h2>Login</h2>
             <form id="login" action="/api/auth/user" method="POST">
                 <div class="form-group">
-                    <label for="username">Email</label>
-                    <input class="form-control" type="text" id="username" name="username" required placeholder="Enter email">
+                    <label for="username">Username</label>
+                    <input
+                        class="form-control"
+                        type="text"
+                        id="username"
+                        name="username"
+                        required
+                        placeholder="Enter username"
+                    />
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input class="form-control" type="password" id="password" name="password" required placeholder="Enter password">
+                    <input
+                        class="form-control"
+                        type="password"
+                        id="password"
+                        name="password"
+                        required
+                        placeholder="Enter password"
+                    />
                 </div>
-                <input type="submit" class="form-control btn btn-primary" value="Login">
+                <input
+                    type="submit"
+                    class="form-control btn btn-primary"
+                    value="Login"
+                />
             </form>
-        </div>
+        </main>
         <!-- Includes Components Such As Header -->
         <script src="/js/index.js"></script>
-</body>
-
+    </body>
 </html>

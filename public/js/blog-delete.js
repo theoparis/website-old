@@ -4,7 +4,7 @@ $('#delete-post').on('submit', async(e) => {
     let postContent = $('#content').val();
     let post = { title: postTitle };
     // Test for connecting to server
-    let response = await fetch("/api/blog/admin/deletePost", {
+    let response = await fetch("/blog/api/admin/deletePost", {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
@@ -15,6 +15,11 @@ $('#delete-post').on('submit', async(e) => {
     console.log(result);
     if (result) {
         if (response.status == 200) window.location.href = "/blog";
+        else if (response.status == 400) {
+            $("#error").show();
+            $('#error-message').text(result.message);
+            $("#error").fadeOut(5000);
+        }
         // TODO: handle errors
     }
 });
