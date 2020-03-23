@@ -48,6 +48,8 @@ app.use(
 app.use(
   vhost('throw-out-error.dev', throwOutErrorRouter)
 )
+
+app.use("/toe", throwOutErrorRouter);
 // ----------
 
 app.use('/blog', blogRouter)
