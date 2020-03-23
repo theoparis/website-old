@@ -32,6 +32,7 @@ app.use(
       domain: 'creepinson.xyz',
       maxAge: 86400000, // one day
       httpOnly: false,
+      secure: true
     },
   })
 )
