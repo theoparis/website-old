@@ -28,7 +28,6 @@ app.use(
     secret: '12 34',
     domain: '.creepinson.xyz',
     maxAge: 86400000, // one day
-    secure: true,
   })
 )
 app.use(express.json())
