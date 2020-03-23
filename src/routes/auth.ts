@@ -22,12 +22,12 @@ router.post('/user/create', (req, res) => {
         if (data) {
           req.session.user = data
           req.session.save(() => {
-            res.redirect('/dashboard')
+            res.redirect('https://creepinson.xyz/dashboard')
           })
         } else {
           req.session.user = null
           req.session.save(() => {
-            res.redirect('/dashboard/register')
+            res.redirect('https://creepinson.xyz/dashboard/register')
           })
         }
       })
@@ -38,10 +38,10 @@ router.get('/logout', (req, res) => {
   if (req.session.user) {
     req.session.user = null
     // Save the user's session so that they are logged out
-    req.session.save(() => res.redirect('/dashboard/login'))
+    req.session.save(() => res.redirect('https://creepinson.xyz/dashboard/login'))
   } else {
     // User is not logged in
-    res.redirect('/dashboard/login')
+    res.redirect('https://creepinson.xyz/dashboard/login')
   }
 })
 
@@ -56,11 +56,11 @@ router.post('/user', (req, res) => {
       bcrypt.compare(req.body.password, user.password, function(err, result) {
         if (result == true) {
           req.session.user = user
-          req.session.save(() => res.redirect('/dashboard'))
+          req.session.save(() => res.redirect('https://creepinson.xyz/dashboard'))
         } else {
           req.session.user = null
           req.session.save(() => {
-            res.redirect('/')
+            res.redirect('https://creepinson.xyz/')
           })
         }
       })
