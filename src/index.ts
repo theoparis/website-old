@@ -28,7 +28,7 @@ app.use(
     secret: '12 34',
     resave: true,
     cookie: {
-      domain: '.creepinson.xyz',
+      domain: 'creepinson.xyz',
       maxAge: 86400000, // one day
       httpOnly: false,
     },
