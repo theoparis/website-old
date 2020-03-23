@@ -13,7 +13,6 @@ export const posts = db.get('posts')
 export const users = db.get('users')
 
 export const isLoggedIn = req => {
-    console.log(req.session)
     return req.session.user != null
 }
 
