@@ -15,7 +15,7 @@ router.use('/', async (req, res) => {
   res.redirect('/blog/posts')
 })
 
-router.use('/post/:title', async (req, res) => {
+router.use('/indiv/:title', async (req, res) => {
   res.render('blog/individual', {
     post: await posts.findOne({ title: req.params.title }),
   })
