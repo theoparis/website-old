@@ -12,7 +12,7 @@ router.use("/posts", async (req, res) => {
 });
 
 router.use("/", async (req, res) => {
-    res.redirect("/blog/posts");
+    res.redirect("/posts");
 })
 
 router.use("/post/:title", async (req, res) => {

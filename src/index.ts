@@ -49,8 +49,6 @@ app.use(
 app.use("/toe", throwOutErrorRouter);
 // ----------
 
-app.use('/blog', blogRouter)
-
 app.use('/api/auth', authRouter)
 
 app.set('view engine', 'ejs')
