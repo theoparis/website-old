@@ -34,14 +34,14 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(flash())
 
+app.use('/api/auth', authRouter)
+
 // Subdomains
 app.use(vhost('blog.creepinson.xyz', blogRouter))
 app.use(vhost('throw-out-error.dev', throwOutErrorRouter))
-
-app.use('/toe', throwOutErrorRouter)
 // ----------
+app.use('/toe', throwOutErrorRouter)
 
-app.use('/api/auth', authRouter)
 
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, '..', 'public'))
