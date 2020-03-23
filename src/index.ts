@@ -27,6 +27,7 @@ app.use(
   session({
     secret: '12 34',
     resave: true,
+    saveUninitialized: false,
     cookie: {
       domain: 'creepinson.xyz',
       maxAge: 86400000, // one day
