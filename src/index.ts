@@ -24,12 +24,15 @@ Also has to be first in order for it to work.
 app.use(cors())
 
 app.use(
-  cookieSession({
+  session({
     secret: '12 34',
-    domain: '.creepinson.xyz',
-    maxAge: 86400000, // one day
-    httpOnly: false
-})
+    resave: true,
+    cookie: {
+      domain: '.creepinson.xyz',
+      maxAge: 86400000, // one day
+      httpOnly: false,
+    },
+  })
 )
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -42,7 +45,6 @@ app.use(vhost('blog.creepinson.xyz', blogRouter))
 app.use(vhost('throw-out-error.dev', throwOutErrorRouter))
 // ----------
 app.use('/toe', throwOutErrorRouter)
-
 
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, '..', 'public'))
