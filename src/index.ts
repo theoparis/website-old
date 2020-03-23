@@ -8,6 +8,7 @@ import cors from 'cors'
 import swig from 'swig'
 import fs from 'fs'
 import vhost from 'vhost-ts'
+import cookieSession from 'cookie-session'
 
 import { posts } from './config'
 import { authRouter } from './routes/auth'
@@ -21,27 +22,12 @@ will give us a cross origin (cors) error because they are on different ports.
 Also has to be first in order for it to work.
 */
 app.use(cors())
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*')
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept, authorization'
-  )
-  res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,PUT,OPTIONS')
-  next()
-})
 
 app.use(
-  session({
-    cookie: {
-      // Sets the cookie to secure if the environemnt is production
-      secure: true,
-      maxAge: 365 * 24 * 60 * 60 * 1000,
-      domain: 'creepinson.xyz',
-    },
-    resave: true,
-    saveUninitialized: true,
-    secret: '1234', // why not
+  cookieSession({
+    secret: '12 34',
+    domain: '.creepinson.xyz',
+    maxAge: 86400000, // one day
   })
 )
 app.use(express.json())
