@@ -8,6 +8,7 @@ import cors from 'cors'
 import swig from 'swig'
 import fs from 'fs'
 import vhost from 'vhost-ts'
+import https from 'https'
 import cookieSession from 'cookie-session'
 
 import { posts } from './config'
@@ -17,6 +18,11 @@ import { blogRouter } from './routes/blog/blog'
 import path from 'path'
 import { throwOutErrorRouter } from './routes/throw-out-error'
 const app = express()
+const result = require('dotenv').config()
+if (result.error) {
+  throw result.error
+}
+const env = result.parsed
 /* If we don't use this, accessing the api from the frontend
 will give us a cross origin (cors) error because they are on different ports.
 Also has to be first in order for it to work.
@@ -32,7 +38,7 @@ app.use(
       domain: '.creepinson.xyz',
       // maxAge: 86400000, // one day
       httpOnly: false,
-      path: "/"
+      path: '/',
     },
   })
 )
@@ -43,10 +49,10 @@ app.use(flash())
 app.use('/api/auth', authRouter)
 
 // Subdomains
-app.use(vhost('blog.creepinson.xyz', blogRouter))
 app.use(vhost('throw-out-error.dev', throwOutErrorRouter))
 // ----------
 app.use('/toe', throwOutErrorRouter)
+app.use('/blog', blogRouter)
 
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, '..', 'public'))
@@ -81,12 +87,22 @@ const error404 = (req, res, html) => {
   res.status(404).send('<h1>404</h1><h2>Requested Resource Not Found</h2>')
 }
 
-/* 
-The env variable here can be used in hosting companies like heroku
-in order to assign the port from the CLI automatically. If we do not specify this variable,
-heroku or some other hosting providers will assign a random port that is not being used by this app,
-therefore it will not serve the website.
-*/
-app.listen(process.env.port || 3000, () => {
-  console.log('Express server listening on 0.0.0.0:3000')
-})
+if (process.env.NODE_ENV === 'production') {
+  // we will pass our 'app' to 'https' server
+  https
+    .createServer(
+      {
+        key: fs.readFileSync(env.key),
+        cert: fs.readFileSync(env.cert),
+      },
+      app
+    )
+    .listen(env.sslPort || 8443)
+  app.listen(process.env.port || 3000, () => {
+    console.log('Express server listening on 0.0.0.0:3000')
+  })
+} else {
+  app.listen(process.env.port || 3000, () => {
+    console.log('Express server listening on 0.0.0.0:3000')
+  })
+}
