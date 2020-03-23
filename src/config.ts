@@ -11,6 +11,7 @@ export const saltRounds = 10
 export const db = monk(dbUrl)
 export const posts = db.get('posts')
 export const users = db.get('users')
+export const projects = db.get("projects")
 
 export const isLoggedIn = req => {
     return req.session.user != null

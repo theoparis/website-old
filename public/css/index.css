@@ -33,12 +33,14 @@ header {
     border-bottom: #ff3300 5px solid;
 }
 
+
 main {
     padding-top: 20px;
 }
 
-#posts-container .card-body {
+.card-body, .card {
     background-color: #4d4d4d;
+    border-radius: 8px;
 }
 
 #posts-container a {

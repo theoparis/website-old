@@ -2,6 +2,5 @@
 
 - Banner without text for mobile screen sizes
 
-## Done
-
-- ~~Theme update: darker grey, transparent banner~~
+- Create store
+- Make the footer into a component
