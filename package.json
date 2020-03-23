@@ -25,7 +25,6 @@
         "ejs": "^3.0.1",
         "express": "^4.17.1",
         "express-flash": "0.0.2",
-        "express-session": "^1.17.0",
         "imap-server": "0.0.1",
         "mailin": "^3.0.4",
         "monk": "^7.1.2",
