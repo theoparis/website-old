@@ -28,7 +28,8 @@ app.use(
     secret: '12 34',
     domain: '.creepinson.xyz',
     maxAge: 86400000, // one day
-  })
+    httpOnly: false
+})
 )
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
