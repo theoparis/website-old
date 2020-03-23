@@ -15,7 +15,7 @@ $('#create-post').on('submit', async (e) => {
     console.log(result);
     if (result) {
         if (response.status == 201) {
-            window.location.href = "/blog/posts";
+            window.location.href = "https://blog.creepinson.xyz";
         } else if (response.status == 400) {
             $("#error").show();
             $('#error-message').text(result.message);
