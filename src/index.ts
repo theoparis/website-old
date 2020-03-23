@@ -98,7 +98,7 @@ if (process.env.NODE_ENV === 'production') {
       app
     )
     .listen(env.sslPort || 8443)
-  app.listen(process.env.port || 3000, () => {
+  app.listen(env.port || 3000, () => {
     console.log('Express server listening on 0.0.0.0:3000')
   })
 } else {
