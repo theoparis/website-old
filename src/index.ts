@@ -40,10 +40,7 @@ app.use(flash())
 
 // Subdomains
 app.use(
-  vhost('blog.creepinson.xyz', (req, res, next) => {
-    req.url = req.url + req.vhost[0]
-    next()
-  })
+  vhost('blog.creepinson.xyz', blogRouter)
 )
 app.use(
   vhost('throw-out-error.dev', throwOutErrorRouter)
