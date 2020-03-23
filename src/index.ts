@@ -7,7 +7,7 @@ import session from 'express-session'
 import cors from 'cors'
 import swig from 'swig'
 import fs from 'fs'
-import vhost from "vhost-ts";
+import vhost from 'vhost-ts'
 
 import { posts } from './config'
 import { authRouter } from './routes/auth'
@@ -21,13 +21,23 @@ will give us a cross origin (cors) error because they are on different ports.
 Also has to be first in order for it to work.
 */
 app.use(cors())
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, authorization'
+  )
+  res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,PUT,OPTIONS')
+  next()
+})
+
 app.use(
   session({
     cookie: {
       // Sets the cookie to secure if the environemnt is production
-      secure: false,
+      secure: true,
       maxAge: 365 * 24 * 60 * 60 * 1000,
-      httpOnly: true,
+      domain: 'creepinson.xyz',
     },
     resave: true,
     saveUninitialized: true,
@@ -39,14 +49,10 @@ app.use(express.urlencoded({ extended: true }))
 app.use(flash())
 
 // Subdomains
-app.use(
-  vhost('blog.creepinson.xyz', blogRouter)
-)
-app.use(
-  vhost('throw-out-error.dev', throwOutErrorRouter)
-)
+app.use(vhost('blog.creepinson.xyz', blogRouter))
+app.use(vhost('throw-out-error.dev', throwOutErrorRouter))
 
-app.use("/toe", throwOutErrorRouter);
+app.use('/toe', throwOutErrorRouter)
 // ----------
 
 app.use('/api/auth', authRouter)
