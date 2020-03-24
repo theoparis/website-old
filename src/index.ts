@@ -1,6 +1,7 @@
 // import dependencies
 // Here we use the import statement for typescript
 import express from 'express'
+import fetch from 'node-fetch'
 import monk from 'monk'
 import flash from 'express-flash'
 import session from 'express-session'
@@ -51,12 +52,15 @@ app.use('/api/auth', authRouter)
 // Subdomains
 app.use(vhost('throw-out-error.dev', throwOutErrorRouter))
 // ----------
+
 app.use('/toe', throwOutErrorRouter)
 app.use('/blog', blogRouter)
 app.get('/projects', async (req, res) => {
+  // Fetch github projects from my dev team
+  var githubProjects = await (await fetch("http://api.github.com/users/throw-out-error/repos")).json();
   res.render('projects/index', {
-    projectsCompleted: (await projects.find({ completed: true })).length,
-    projectsWorkedOn: (await projects.find({})).length,
+    projectsWorkedOn: (await projects.find({})).length + githubProjects.length,
+    projects: (await projects.find({}))
   })
 })
 

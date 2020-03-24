@@ -8,4 +8,12 @@ router.get('/', (req, res) => {
   )
 })
 
+router.get("/projects", async (req, res) => {
+    // Fetch github projects from my dev team
+    var githubProjects = await (await fetch("https://api.github.com/users/throw-out-error/repos")).json();
+    res.render('projects/index', {
+      projectsWorkedOn: githubProjects.length,
+    })
+});
+
 export const throwOutErrorRouter = router
