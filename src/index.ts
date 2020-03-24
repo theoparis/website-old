@@ -60,7 +60,8 @@ app.get('/projects', async (req, res) => {
   var githubProjects = await (await fetch("http://api.github.com/users/throw-out-error/repos")).json();
   res.render('projects/index', {
     projectsWorkedOn: (await projects.find({})).length + githubProjects.length,
-    projects: (await projects.find({}))
+    projects: (await projects.find({})),
+    githubProjects
   })
 })
 
