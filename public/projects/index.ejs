@@ -14,15 +14,32 @@
       <p>
         <%= projectsWorkedOn %> Projects
       </p>
-      <!-- <div class="border-panel card mt-4">
-        <div class="card-body card-title">
-          <h2 class="card-title">Project 1</h2>
-          <div class="card-text">
-            <p>
-              
+      <div id="githubProjects">
+        <% githubProjects.forEach(project => { %> <% if(!project.fork) { %>
+        <div class="border-panel card mt-4">
+          <div class="card-body">
+            <h2 class="post-title card-title">
+              <a
+                target="_blank"
+                href="<%= project.homepage || project.html_url %>"
+              >
+                <%= project.name.split("-").map(s => s[0].toUpperCase() +
+                s.substr(1)).join(" "); %>
+              </a>
+            </h2>
+            <a
+              class="text-muted card-subtitle"
+              target="_blank"
+              href="<%= project.html_url %>"
+              >Source Code</a
+            >
+            <div class="post-description card-text">
+              <p><%= project.description %></p>
+            </div>
           </div>
         </div>
-      </div> -->
+        <% } %> <% }); %>
+      </div>
     </div>
     <!-- 
     <section id="boxes">
