@@ -57,7 +57,7 @@ app.use('/toe', throwOutErrorRouter)
 app.use('/blog', blogRouter)
 app.get('/projects', async (req, res) => {
   // Fetch github projects from my dev team
-  var githubProjects = await (await fetch("http://api.github.com/users/throw-out-error/repos")).json();
+  var githubProjects = await (await fetch("http://api.github.com/users/throw-out-error/repos?sort=pushed")).json();
   res.render('projects/index', {
     projectsWorkedOn: (await projects.find({})).length + githubProjects.length,
     projects: (await projects.find({})),

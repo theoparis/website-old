@@ -43,12 +43,12 @@ main {
     border-radius: 8px;
 }
 
-#posts-container a {
+a {
     color: #48e5c2;
     font-weight: bold;
 }
 
-#posts-container a:hover {
+a:hover {
     color: #ff3300;
     font-weight: bold;
 }
