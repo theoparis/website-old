@@ -16,8 +16,9 @@ router.get('/google', async (req, res) => {
       var existing = await users.findOne({ email: google.email })
       if (existing) {
         if (existing.provider != 'google') {
-          existing.googleId = google.id
           existing.provider = 'google'
+          existing.picture = google.picture
+          existing.name = google.name
           await existing.save()
         }
         req.session.user = existing
@@ -29,7 +30,8 @@ router.get('/google', async (req, res) => {
         const user = await users.insert({
           email: google.email,
           provider: 'google',
-          googleId: google.id,
+          picture: google.picture,
+
         })
         if (user) {
           req.session.user = user
