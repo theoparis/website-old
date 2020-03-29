@@ -145,7 +145,7 @@ const defaultScope = [
  */
 function generateAuthUrl(json: AuthUrlOptions) {
   // TODO: fix scope url to match any length of array
-  return encodeURI(`https://accounts.google.com/o/oauth2/v2/auth?access_type=${json.access_type}&scope=${json.scope[0]} ${json.scope[1]}&response_type=${json.response_type||'code'}&client_id=${json.client_id}&prompt=${json.prompt}&redirect_uri=${json.redirect_uri}`).replace(/&amp;/g, "&");
+  return encodeURI(`https://accounts.google.com/o/oauth2/v2/auth?${Object.keys(json).map(key=>encodeURIComponent(`${key}=${json[key]}`)).join("&")}`);
 }
 
 /**
