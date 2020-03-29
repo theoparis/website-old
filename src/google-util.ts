@@ -1,9 +1,9 @@
 import { google } from 'googleapis'
 import { env } from './config'
+import fetch from 'node-fetch'
 
 const googleConfig = {
-  clientId:
-    '810453248991-5s0p53b2l4nd5cdjnumii8m6dp2lv750.apps.googleusercontent.com', // e.g. asdfghjkljhgfdsghjk.apps.googleusercontent.com
+  clientId: env.googleId, // e.g. asdfghjkljhgfdsghjk.apps.googleusercontent.com
   clientSecret: env.googleSecret, // e.g. _ASDFA%DFASDFASDFASD#FAD-
   redirect: 'https://creepinson.xyz/api/auth/google', // this must match your google api settings
 }
@@ -19,7 +19,7 @@ export interface AuthUrlOptions {
    * first time that your application exchanges an authorization code for
    * tokens.
    */
-  access_type: string;
+  access_type: string
   /**
    * The hd (hosted domain) parameter streamlines the login process for G Suite
    * hosted accounts. By including the domain of the G Suite user (for example,
@@ -32,16 +32,16 @@ export interface AuthUrlOptions {
    * (e.g. mycolledge.edu). Unlike the request parameter, the ID token claim is
    * contained within a security token from Google, so the value can be trusted.
    */
-  hd?: string;
+  hd?: string
   /**
    * The 'response_type' will always be set to 'CODE'.
    */
-  response_type?: string;
+  response_type?: string
   /**
    * The client ID for your application. The value passed into the constructor
    * will be used if not provided. You can find this value in the API Console.
    */
-  client_id: string;
+  client_id: string
   /**
    * Determines where the API server redirects the user after the user
    * completes the authorization flow. The value must exactly match one of the
@@ -49,7 +49,7 @@ export interface AuthUrlOptions {
    * the http or https scheme, case, and trailing slash ('/') must all match.
    * The value passed into the constructor will be used if not provided.
    */
-  redirect_uri: string;
+  redirect_uri: string
   /**
    * Required. A space-delimited list of scopes that identify the resources that
    * your application could access on the user's behalf. These values inform the
@@ -65,7 +65,7 @@ export interface AuthUrlOptions {
    * users to more easily understand why your application needs the access it is
    * requesting.
    */
-  scope?: string[];
+  scope?: string[]
   /**
    * Recommended. Specifies any string value that your application uses to
    * maintain state between your authorization request and the authorization
@@ -83,7 +83,7 @@ export interface AuthUrlOptions {
    * against attacks such as cross-site request forgery. See the OpenID Connect
    * documentation for an example of how to create and confirm a state token.
    */
-  state?: string;
+  state?: string
   /**
    * Optional. Enables applications to use incremental authorization to request
    * access to additional scopes in context. If you set this parameter's value
@@ -91,7 +91,7 @@ export interface AuthUrlOptions {
    * will also cover any scopes to which the user previously granted the
    * application access. See the incremental authorization section for examples.
    */
-  include_granted_scopes?: boolean;
+  include_granted_scopes?: boolean
   /**
    * Optional. If your application knows which user is trying to authenticate,
    * it can use this parameter to provide a hint to the Google Authentication
@@ -100,7 +100,7 @@ export interface AuthUrlOptions {
    * appropriate multi-login session. Set the parameter value to an email
    * address or sub identifier, which is equivalent to the user's Google ID.
    */
-  login_hint?: string;
+  login_hint?: string
   /**
    * Optional. A space-delimited, case-sensitive list of prompts to present the
    * user. If you don't specify this parameter, the user will be prompted only
@@ -111,13 +111,13 @@ export interface AuthUrlOptions {
    * 'consent' - 	Prompt the user for consent.
    * 'select_account' - Prompt the user to select an account.
    */
-  prompt: string;
+  prompt: string
   /**
    * Recommended. Specifies an encoded 'code_verifier' that will be used as a
    * server-side challenge during authorization code exchange. This parameter
    * must be used with the 'code_challenge' parameter described above.
    */
-  code_challenge?: string;
+  code_challenge?: string
 }
 
 /**
@@ -134,18 +134,19 @@ function createConnection() {
 /**
  * This scope tells google what information we want to request.
  */
-const defaultScope = [
-  'https://www.googleapis.com/auth/plus.me',
-  'https://www.googleapis.com/auth/userinfo.email',
-]
+const defaultScope = ['https://www.googleapis.com/auth/userinfo.profile']
 
 /**
- * 
+ *
  * @param json The options to generate with
  */
 function generateAuthUrl(json: AuthUrlOptions) {
   // TODO: fix scope url to match any length of array
-  return encodeURI(`https://accounts.google.com/o/oauth2/v2/auth?${Object.keys(json).map(key=>`${key}=${key == 'scope' ? json[key].join(' ') : json[key]}`).join("&")}`);
+  return encodeURI(
+    `https://accounts.google.com/o/oauth2/v2/auth?${Object.keys(json)
+      .map(key => `${key}=${key == 'scope' ? json[key].join(' ') : json[key]}`)
+      .join('&')}`
+  )
 }
 
 /**
@@ -171,10 +172,16 @@ export function urlGoogle() {
 }
 
 /**
- * Helper function to get the library with access to the google plus api.
+ * Helper function to get a user's profile
+ * @returns the result, containing a status code and a 'data' object
  */
-function getGooglePlusApi(auth) {
-  return google.plus({ version: 'v1', auth })
+export async function getGoogleProfile(token) {
+  const result = await (
+    await fetch('https://www.googleapis.com/oauth2/v1/userinfo?access_token='+token, {
+      headers: { Authorization: 'Bearer ' + token },
+    })
+  ).json()
+  return result
 }
 
 /**
@@ -189,18 +196,12 @@ export async function getGoogleAccountFromCode(code) {
   auth.setCredentials(tokens)
 
   // connect to google plus - need this to get the user's email
-  const plus = getGooglePlusApi(auth)
-  const me = await plus.people.get({ userId: 'me' })
-
-  // get the google id and email
-  const userGoogleId = me.data.id
-  const userGoogleEmail =
-    me.data.emails && me.data.emails.length && me.data.emails[0].value
-
+  const me = await getGoogleProfile(data.tokens.access_token)
   // return so we can login or sign up the user
   return {
-    id: userGoogleId,
-    email: userGoogleEmail,
+    email: me.email,
+    name: me.name,
+    picture: me.picture ,
     tokens: tokens, // you can save these to the user if you ever want to get their details without making them log in again
   }
 }
