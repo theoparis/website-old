@@ -11,6 +11,7 @@
         <%- include("../components/header") %>
         <main class="container">
             <h2>Login</h2>
+            <a href="<%= googleUrl %>">Click To Login With Google</a>
             <form id="login" action="/api/auth/user" method="POST">
                 <div class="form-group">
                     <label for="username">Username</label>

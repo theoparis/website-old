@@ -11,19 +11,19 @@ import fs from 'fs'
 import vhost from 'vhost-ts'
 import https from 'https'
 import cookieSession from 'cookie-session'
+import ytdl from 'ytdl-core'
+import { downloadOptions, videoFormat } from 'ytdl-core'
 
-import { projects } from './config'
+import { projects, env } from './config'
 import { authRouter } from './routes/auth'
 import { blogRouter } from './routes/blog/blog'
 
 import path from 'path'
 import { throwOutErrorRouter } from './routes/throw-out-error'
+import { storeRouter } from './routes/store'
+import { urlGoogle } from './google-util'
 const app = express()
-const result = require('dotenv').config()
-if (result.error) {
-  throw result.error
-}
-const env = result.parsed
+
 /* If we don't use this, accessing the api from the frontend
 will give us a cross origin (cors) error because they are on different ports.
 Also has to be first in order for it to work.
@@ -53,16 +53,38 @@ app.use('/api/auth', authRouter)
 app.use(vhost('throw-out-error.dev', throwOutErrorRouter))
 // ----------
 
+app.use('/store', storeRouter)
+
+app.get('/convert/ytmp3', (req, res) => {
+  const url = req.query.url
+  res.header('Content-Disposition', 'attachment; filename="audio.mp3"')
+  ytdl(url, {
+    filter: 'audioonly',
+  }).pipe(res)
+})
+
+app.get('/convert/ytmp4', (req, res) => {
+  const url = req.query.url
+  res.header('Content-Disposition', 'attachment; filename="video.mp4"')
+  ytdl(url, {}).pipe(res)
+})
+
 app.use('/toe', throwOutErrorRouter)
 app.use('/blog', blogRouter)
 app.get('/projects', async (req, res) => {
   // Fetch github projects from my dev team
-  var githubProjects = await (await fetch("http://api.github.com/users/throw-out-error/repos?sort=pushed")).json();
+  var githubProjects = await (
+    await fetch('http://api.github.com/users/throw-out-error/repos?sort=pushed')
+  ).json()
   res.render('projects/index', {
     projectsWorkedOn: (await projects.find({})).length + githubProjects.length,
-    projects: (await projects.find({})),
-    githubProjects
+    projects: await projects.find({}),
+    githubProjects,
   })
+})
+
+app.get("/dashboard/google", (req, res) => {
+  res.render("/dashboard/google", { googleUrl: urlGoogle() });
 })
 
 app.set('view engine', 'ejs')
@@ -79,14 +101,29 @@ app.use('*', (req, res, next) => {
     ) {
       res.sendFile(file)
     } else {
-      res.render(file, { session: req.session }, (err, html) => {
-        if (err) {
-          if (err.message.startsWith('Failed to lookup view'))
-            error404(req, res, html)
-        } else {
-          res.send(html)
-        }
-      })
+      if (req.query.error && req.query.error != null) {
+        res.render(
+          file,
+          { session: req.session, error: req.query.error },
+          (err, html) => {
+            if (err) {
+              if (err.message.startsWith('Failed to lookup view'))
+                error404(req, res, html)
+            } else {
+              res.send(html)
+            }
+          }
+        )
+      } else {
+        res.render(file, { session: req.session }, (err, html) => {
+          if (err) {
+            if (err.message.startsWith('Failed to lookup view'))
+              error404(req, res, html)
+          } else {
+            res.send(html)
+          }
+        })
+      }
     }
   } else {
     next()
@@ -98,22 +135,6 @@ const error404 = (req, res, html) => {
   res.status(404).send('<h1>404</h1><h2>Requested Resource Not Found</h2>')
 }
 
-if (process.env.NODE_ENV === 'production') {
-  // we will pass our 'app' to 'https' server
-  https
-    .createServer(
-      {
-        key: fs.readFileSync(env.key),
-        cert: fs.readFileSync(env.cert),
-      },
-      app
-    )
-    .listen(env.sslPort || 8443)
-  app.listen(env.port || 3000, () => {
-    console.log('Express server listening on 0.0.0.0:3000')
-  })
-} else {
-  app.listen(process.env.port || 3000, () => {
-    console.log('Express server listening on 0.0.0.0:3000')
-  })
-}
+app.listen(process.env.port || 3000, () => {
+  console.log('Express server listening on 0.0.0.0:3000')
+})
