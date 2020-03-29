@@ -35,6 +35,7 @@ function getConnectionUrl(auth) {
     access_type: 'offline',
     prompt: 'consent', // access type and approval prompt will force a new refresh token to be made each time signs in
     scope: defaultScope,
+    response_type: 'CODE',
   })
 }
 /**
