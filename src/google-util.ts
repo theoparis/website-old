@@ -145,14 +145,14 @@ const defaultScope = [
  */
 function generateAuthUrl(json: AuthUrlOptions) {
   // TODO: fix scope url to match any length of array
-  return encodeURIComponent(`https://accounts.google.com/o/oauth2/v2/auth?access_type=${json.access_type}&scope=${json.scope[0]} ${json.scope[1]}&response_type=${json.response_type||'code'}&client_id=${json.client_id}&prompt=${json.prompt}&redirect_uri=${json.redirect_uri}`).replace(/&amp;/g, "&");
+  return encodeURI(`https://accounts.google.com/o/oauth2/v2/auth?access_type=${json.access_type}&scope=${json.scope[0]} ${json.scope[1]}&response_type=${json.response_type||'code'}&client_id=${json.client_id}&prompt=${json.prompt}&redirect_uri=${json.redirect_uri}`).replace(/&amp;/g, "&");
 }
 
 /**
  * Get a url which will open the google sign-in page and request access to the scope provided (such as calendar events).
  */
 function getConnectionUrl(auth) {
-  return generateAuthUrl({
+  return auth.generateAuthUrl({
     access_type: 'offline',
     prompt: 'consent', // access type and approval prompt will force a new refresh token to be made each time signs in
     scope: defaultScope,
