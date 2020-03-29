@@ -84,7 +84,7 @@ app.get('/projects', async (req, res) => {
 })
 
 app.get("/dashboard/google", (req, res) => {
-  res.render("/dashboard/google", { googleUrl: urlGoogle() });
+  res.render("dashboard/google", { googleUrl: urlGoogle() });
 })
 
 app.set('view engine', 'ejs')
