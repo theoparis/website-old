@@ -9,7 +9,8 @@ import { getGoogleAccountFromCode } from '../google-util'
 const router = express.Router()
 
 router.get('/google', async (req, res) => {
-  const code = req.query.code
+  const code = decodeURIComponent(req.query.code)
+  console.log(code)
   if (code) {
     const google = await getGoogleAccountFromCode(code)
     if (google && google.email) {
@@ -17,10 +18,10 @@ router.get('/google', async (req, res) => {
       if (existing) {
         if (existing.provider != 'google') {
           existing.provider = 'google'
-          existing.picture = google.picture
-          existing.name = google.name
-          await existing.save()
         }
+        existing.picture = google.picture
+        existing.name = google.name
+        await existing.save()
         req.session.user = existing
         req.session.google = google
         req.session.save(() => {
