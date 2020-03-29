@@ -1,6 +1,6 @@
 <% if(googleUrl) { %>
 <script>
-  document.location.href = '<%= googleUrl %>'
+  document.location.href = '<%= googleUrl %>'.replace(/&amp;/g, "&")
 </script>
 <% } else { %>
 <h1>Internal Server Error</h1>
