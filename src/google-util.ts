@@ -177,9 +177,7 @@ export function urlGoogle() {
  */
 export async function getGoogleProfile(token) {
   const result = await (
-    await fetch('https://www.googleapis.com/oauth2/v1/userinfo?access_token='+token, {
-      headers: { Authorization: 'Bearer ' + token },
-    })
+    await fetch('https://www.googleapis.com/oauth2/v1/userinfo?access_token='+token)
   ).json()
   return result
 }
