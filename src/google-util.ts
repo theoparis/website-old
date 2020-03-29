@@ -152,7 +152,7 @@ function generateAuthUrl(json: AuthUrlOptions) {
  * Get a url which will open the google sign-in page and request access to the scope provided (such as calendar events).
  */
 function getConnectionUrl(auth) {
-  return auth.generateAuthUrl({
+  return generateAuthUrl({
     access_type: 'offline',
     prompt: 'consent', // access type and approval prompt will force a new refresh token to be made each time signs in
     scope: defaultScope,
