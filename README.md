@@ -1,7 +1,7 @@
 # Website Project
 This website project is made by Creepinson (Theo) and is serving the following websites:
 
-[throw-out-error](https://throw-out-error.dev)
+[throw-out-error](https://throw-out-error.dev)  
 [creepinson's website](https://creepinson.xyz)
 
 This project was created with EJS, Node.JS, Typescript, Monk, CSS, and more. The database we are using is called MongoDB. 
