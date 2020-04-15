@@ -191,7 +191,6 @@ export async function getGoogleAccountFromCode(code) {
   // get the auth "tokens" from the request
   const data = await auth.getToken(code)
   const tokens = data.tokens
-  auth.setCredentials(tokens)
 
   // connect to google plus - need this to get the user's email
   const me = await getGoogleProfile(data.tokens.access_token)
