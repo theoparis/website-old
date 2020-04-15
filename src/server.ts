@@ -135,6 +135,6 @@ const error404 = (req, res, html) => {
   res.status(404).send('<h1>404</h1><h2>Requested Resource Not Found</h2>')
 }
 
-app.listen(process.env.port || 3000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log('Express server listening on 0.0.0.0:3000')
 })
