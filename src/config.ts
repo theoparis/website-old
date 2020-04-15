@@ -2,7 +2,7 @@ import monk from 'monk'
 import bcrypt from 'bcrypt'
 import Stripe from 'stripe'
 
-export const dbUrl = 'localhost:27017/website'
+export const dbUrl = process.env.MONGO_URI || 'localhost:27017/website'
 export const permissionLevels = {
   user: 'user',
   writer: 'writer',
