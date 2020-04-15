@@ -9,7 +9,7 @@ import { getGoogleAccountFromCode } from '../google-util'
 const router = express.Router()
 
 router.get('/google', async (req, res) => {
-  const code = decodeURIComponent(req.query.code)
+  const code = decodeURIComponent(req.query.code.toString())
   console.log(code)
   if (code) {
     const google = await getGoogleAccountFromCode(code)
