@@ -19,8 +19,9 @@ const result = require('dotenv').config()
 if (result.error) {
   console.log("Found dotenv error: ")
   console.error(result.error)
+} else {
+  process.env = result.parsed || process.env;
 }
-export const env = result.parsed
 
 export const isLoggedIn = req => {
   return req.session.user != null
@@ -34,7 +35,9 @@ export const hasRole = async (req, role) => {
     await users.findOne({ username: req.session.user.username })
   ).roles.includes(role)
 }
-export const stripe = new Stripe(env.stripeKey, { apiVersion: '2020-03-02' })
+
+// TODO; make this optional
+export const stripe = new Stripe(process.env.stripeKey, { apiVersion: '2020-03-02' })
 
 export const getProducts = async () => {
   const products = await stripe.products.list({ limit: 100 })

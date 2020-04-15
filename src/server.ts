@@ -14,7 +14,7 @@ import cookieSession from 'cookie-session'
 import ytdl from 'ytdl-core'
 import { downloadOptions, videoFormat } from 'ytdl-core'
 
-import { projects, env } from './config'
+import { projects } from './config'
 import { authRouter } from './routes/auth'
 import { blogRouter } from './routes/blog/blog'
 

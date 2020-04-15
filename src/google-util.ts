@@ -1,10 +1,9 @@
 import { google } from 'googleapis'
-import { env } from './config'
 import fetch from 'node-fetch'
 
 const googleConfig = {
-  clientId: env.googleId, // e.g. asdfghjkljhgfdsghjk.apps.googleusercontent.com
-  clientSecret: env.googleSecret, // e.g. _ASDFA%DFASDFASDFASD#FAD-
+  clientId: process.env.googleId, // e.g. asdfghjkljhgfdsghjk.apps.googleusercontent.com
+  clientSecret: process.env.googleSecret, // e.g. _ASDFA%DFASDFASDFASD#FAD-
   redirect: 'https://creepinson.xyz/api/auth/google', // this must match your google api settings
 }
 
