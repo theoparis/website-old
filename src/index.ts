@@ -56,7 +56,7 @@ app.use(vhost('throw-out-error.dev', throwOutErrorRouter))
 app.use('/store', storeRouter)
 
 app.get('/convert/ytmp3', (req, res) => {
-  const url = req.query.url
+  const url = req.query.url.toString()
   res.header('Content-Disposition', 'attachment; filename="audio.mp3"')
   ytdl(url, {
     filter: 'audioonly',
