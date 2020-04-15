@@ -1,16 +1,18 @@
 {
-    "name": "server",
+    "name": "website",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
+    "main": "dist/server.js",
     "scripts": {
-        "compile": "tsc && node dist/index.js",
-        "start": "npm run compile",
-        "dev": "nodemon -e ts --watch public/** --watch src/** --exec \"npm run compile\""
+        "build": "tsc",
+        "postinstall": "npm run build",
+        "start": "npm run serve",
+        "serve": "node dist/server.js",
+        "dev": "nodemon -e ts --watch public/** --watch src/** --exec \"tsc\""
     },
     "keywords": [],
     "author": "",
-    "license": "ISC",
+    "license": "MIT",
     "dependencies": {
         "@types/cookie-session": "^2.0.39",
         "@types/cors": "^2.8.6",
