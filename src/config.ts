@@ -17,7 +17,8 @@ export const products = db.get('products')
 
 const result = require('dotenv').config()
 if (result.error) {
-  throw result.error
+  console.log("Found dotenv error: ")
+  console.error(result.error)
 }
 export const env = result.parsed
 
