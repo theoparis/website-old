@@ -64,7 +64,7 @@ app.get('/convert/ytmp3', (req, res) => {
 })
 
 app.get('/convert/ytmp4', (req, res) => {
-  const url = req.query.url
+  const url = req.query.url.toString()
   res.header('Content-Disposition', 'attachment; filename="video.mp4"')
   ytdl(url, {}).pipe(res)
 })
