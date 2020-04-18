@@ -22,7 +22,7 @@ header {
     /* margin-bottom: 20px; */
     top: 0;
     left: 0;
-    position: relative;
+    position: sticky;
     height: auto;
     min-height: 120px;
     /* position: fixed;  */
