@@ -78,10 +78,22 @@ app.get('/projects', async (req, res) => {
             'http://api.github.com/users/throw-out-error/repos?sort=pushed'
         )
     ).json()
+    if (req.query.search)
+        githubProjects = githubProjects.filter(
+            (p) =>
+                p.name != '' && p.name.toLowerCase().includes(req.query.search)
+        )
+
+    var projectsList = await projects.find({})
+    if (req.query.search)
+    projectsList = projectsList.filter(
+        (p) =>
+            p.name != '' && p.name.toLowerCase().includes(req.query.search)
+    )
+    const projectsAmount = projectsList.length + githubProjects.length
     res.render('projects/index', {
-        projectsWorkedOn:
-            (await projects.find({})).length + githubProjects.length,
-        projects: await projects.find({}),
+        projectsWorkedOn: projectsAmount,
+        projects: projectsList,
         githubProjects,
     })
 })
