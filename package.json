@@ -4,10 +4,10 @@
     "description": "",
     "main": "dist/server.js",
     "scripts": {
-        "build": "tsc",
+        "build": "tsc -p ./tsconfig.json",
         "start": "npm run serve",
         "serve": "node dist/server.js",
-        "dev": "nodemon -e ts --watch public/** --watch src/** --exec \"tsc\""
+        "dev": "nodemon"
     },
     "keywords": [],
     "author": "",
@@ -44,6 +44,7 @@
         "ytdl-core": "^2.0.1"
     },
     "devDependencies": {
-        "ejs-lint": "^1.0.1"
+        "ejs-lint": "^1.0.1",
+        "ts-node": "^8.8.2"
     }
 }
