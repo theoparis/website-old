@@ -1,5 +1,5 @@
 body {
-    background-color: #333333;
+    background-color: #555555;
     color: white;
     margin: 0;
     padding: 0;
@@ -10,13 +10,10 @@ body {
     padding-top: 25px;
 }
 
-
 /* Header */
-
 header {
+    background-color: #2e2e2e;
     z-index: 1;
-    background-color: #0099cc;
-    color: #ffffff;
     overflow: hidden;
     background-size: cover;
     /* margin-bottom: 20px; */
@@ -30,15 +27,72 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-bottom: #00ff22 5px solid;
+    border-bottom: #0099cc 5px solid;
+}
+
+header h1 {
+    color: #3877be;
+}
+
+.red-text {
+    /* Red w/ White Outline */
+    color: #00bfff;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+    /* --- */
+}
+
+.active {
+    transform: scale(75%);
+}
+
+header nav ul a {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header nav ul a:hover {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 22.5px;
+    font-weight: bold;
+}
+
+header nav ul a:active {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 22.5px;
+    font-weight: bold;
+}
+
+header ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+header li {
+    padding: 0 20px 0 20px;
+    /* border-right: 4px solid #ffffff; */
+    text-align: center;
+    list-style-type: none;
+}
+/* ----- */
+
+.navlink {
+    margin-bottom: 10px;
 }
 
 main h2 {
-    color: #00ff22;
+    color: #0099cc;
 }
 
 .page-title {
-    color: #0099cc;
+    color: #00bfff;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
     font-weight: bold;
 }
 
@@ -50,7 +104,8 @@ main {
     width: 25%;
 }
 
-.card-body, .card {
+.card-body,
+.card {
     background-color: #4d4d4d;
     border-radius: 8px;
 }
@@ -61,7 +116,7 @@ a {
 }
 
 a:hover {
-    color: #ff3300;
+    color: #154cc2;
     font-weight: bold;
 }
 
@@ -102,55 +157,11 @@ a:hover {
     /* float: left; */
 }
 
-header nav ul a {
-    color: #cc00cc;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 18px;
-    font-weight: bold;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.navlink {
-    margin-bottom: 10px;
-}
-
-header nav ul a:hover {
-    color: #660066;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 22.5px;
-    font-weight: bold;
-}
-
-header nav ul a:active {
-    color: #000066;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 22.5px;
-    font-weight: bold;
-}
-
-header ul {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-}
-
-header li {
-    padding: 0 20px 0 20px;
-    /* border-right: 4px solid #ffffff; */
-    text-align: center;
-    list-style-type: none;
-}
-
 #branding a {
     position: relative;
 }
 
 #branding a h1 {
-    color: #cc00cc;
     font-weight: bold;
     text-align: center;
     font-size: 38px;
@@ -164,6 +175,7 @@ header nav {
 .navbar-toggler {
     margin-bottom: 15px;
     width: 100%;
+    color: #fff;
 }
 
 #services {
@@ -246,7 +258,6 @@ header nav {
     float: center;
     position: relative;
 }
-
 
 /*Music*/
 
@@ -332,14 +343,9 @@ header nav {
     margin-bottom: 10px;
 }
 
-.navlink {
-    display: inline;
-}
-
 #featuredbox {
     color: #ffffff;
 }
-
 
 /* showcase */
 
@@ -348,7 +354,7 @@ header nav {
     top: 0;
     width: 100%;
     position: relative;
-    background-image: url("../../assets/banner_2020_transparent.png");
+    background-image: url('../../assets/banner_2020_transparent.png');
     background-repeat: no-repeat;
     background-size: 1280px 720px;
     background-attachment: scroll;
@@ -466,7 +472,6 @@ footer p {
     clear: both;
     overflow: hidden;
 }
-
 
 /* Mobile Screens */
 

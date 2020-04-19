@@ -48,11 +48,6 @@ app.use(express.urlencoded({ extended: true }))
 app.use(flash())
 
 app.use('/api/auth', authRouter)
-
-// Subdomains
-app.use(vhost('throw-out-error.dev', throwOutErrorRouter))
-// ----------
-
 app.use('/store', storeRouter)
 
 app.get('/convert/ytmp3', (req, res) => {
@@ -68,7 +63,17 @@ app.get('/convert/ytmp4', (req, res) => {
     res.header('Content-Disposition', 'attachment; filename="video.mp4"')
     ytdl(url, {}).pipe(res)
 })
+/* 
+//TODO: Doesn't Work Yet
+app.get("*", (req, res, next) => {
+    // Add current page for use in header
+    res.locals.pageUrl = req.flash("pageUrl", req.url)
+    next()
+}) */
 
+// Subdomains
+app.use(vhost('throw-out-error.dev', throwOutErrorRouter))
+// ----------
 app.use('/toe', throwOutErrorRouter)
 app.use('/blog', blogRouter)
 app.get('/projects', async (req, res) => {
@@ -86,10 +91,10 @@ app.get('/projects', async (req, res) => {
 
     var projectsList = await projects.find({})
     if (req.query.search)
-    projectsList = projectsList.filter(
-        (p) =>
-            p.name != '' && p.name.toLowerCase().includes(req.query.search)
-    )
+        projectsList = projectsList.filter(
+            (p) =>
+                p.name != '' && p.name.toLowerCase().includes(req.query.search)
+        )
     const projectsAmount = projectsList.length + githubProjects.length
     res.render('projects/index', {
         projectsWorkedOn: projectsAmount,
