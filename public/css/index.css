@@ -99,7 +99,7 @@ main {
 }
 
 .search-container {
-    width: 25%;
+    width: 100%;
 }
 
 .card-body,
@@ -361,9 +361,7 @@ header nav {
     margin-bottom: 25px;
 }
 
-
 @media only screen and (max-width: 768px) {
-    
 }
 
 #showcase {
