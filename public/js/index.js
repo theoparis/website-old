@@ -1,4 +1,4 @@
-$(function () {
+$(function() {
     /**
      * Jquery code to insert header code into a blank <header> tag.
      *
@@ -9,21 +9,31 @@ $(function () {
     // Feather Icons
     setTimeout(() => feather.replace(), 500)
     $('#brand-name').hover(
-        function () {
+        function() {
             $(this).addClass('animated tada')
         },
-        function () {
+        function() {
             $(this).removeClass('animated tada')
         }
     )
     $('.navlink').hover(
-        function () {
+        function() {
             $(this).addClass('animated rubberBand')
         },
-        function () {
+        function() {
             $(this).removeClass('animated rubberBand')
         }
     )
+
+    $('.box a').click(function(event) {
+        event.preventDefault()
+        $(this).parent().parent().toggleClass('link-clicked')
+        let duration = 1
+        gsap.to('.link-clicked', { duration, scale: 0.01, ease: 'expo' })
+        setTimeout(() => {
+            window.location.href = $(this).attr('href')
+        }, (duration) * 1000)
+    })
 
     if ($('#error')) $('#error').fadeOut(5000)
 })
