@@ -19,7 +19,6 @@ import { authRouter } from './routes/auth'
 import { blogRouter } from './routes/blog/blog'
 
 import path from 'path'
-import { throwOutErrorRouter } from './routes/throw-out-error'
 import { storeRouter } from './routes/store'
 import { urlGoogle } from './google-util'
 const app = express()
@@ -71,10 +70,6 @@ app.get("*", (req, res, next) => {
     next()
 }) */
 
-// Subdomains
-app.use(vhost('throw-out-error.dev', throwOutErrorRouter))
-// ----------
-app.use('/toe', throwOutErrorRouter)
 app.use('/blog', blogRouter)
 app.get('/projects', async (req, res) => {
     // Fetch github projects from my dev team
