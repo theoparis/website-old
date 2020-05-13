@@ -7,14 +7,8 @@ const router = express.Router()
 
 router.use('/api', apiRouter)
 
-router.use('/post/:title', async (req, res) => {
-  res.render('blog/individual', {
-    post: await posts.findOne({ title: req.params.title }),
-  })
-})
-
 router.use('/list', async (req, res) => {
-  res.render('blog/blog', {
+  res.render('blog/list', {
     posts: await posts.find({}, { sort: { createdAt: -1 } }),
   })
 })
@@ -22,5 +16,12 @@ router.use('/list', async (req, res) => {
 router.use('/', async (req, res) => {
   res.redirect('/blog/list')
 })
+
+router.use('/post/:title', async (req, res) => {
+  res.render('blog/individual', {
+    post: await posts.findOne({ title: req.params.title }),
+  })
+})
+
 
 export const blogRouter = router
