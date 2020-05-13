@@ -37,7 +37,6 @@
         "nodemailer": "^6.4.5",
         "nodemon": "^2.0.2",
         "stripe": "^8.37.0",
-        "swig": "^1.4.2",
         "typescript": "^3.8.3",
         "vhost-ts": "^4.0.0",
         "ytdl-core": "^2.0.1"
