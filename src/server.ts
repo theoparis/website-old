@@ -72,29 +72,16 @@ app.get("*", (req, res, next) => {
 
 app.use('/blog', blogRouter)
 app.get('/projects', async (req, res) => {
-    // Fetch github projects from my dev team
-    var githubProjects = await (
-        await fetch(
-            'http://api.github.com/users/throw-out-error/repos?sort=pushed'
-        )
-    ).json()
-    if (req.query.search)
-        githubProjects = githubProjects.filter(
-            (p) =>
-                p.name != '' && p.name.toLowerCase().includes(req.query.search)
-        )
-
     var projectsList = await projects.find({})
     if (req.query.search)
         projectsList = projectsList.filter(
             (p) =>
                 p.name != '' && p.name.toLowerCase().includes(req.query.search)
         )
-    const projectsAmount = projectsList.length + githubProjects.length
+    const projectsAmount = projectsList.length
     res.render('projects/index', {
         projectsWorkedOn: projectsAmount,
         projects: projectsList,
-        githubProjects,
     })
 })
 

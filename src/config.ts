@@ -30,7 +30,8 @@ export const isLoggedIn = req => {
 export const isAuth = (req, res, next) => {
   if (!isLoggedIn(req))
     return res.status(400).json({ message: 'Not logged in' })
-
+  
+  // The user is logged in, continue to the requested page
   next()
 }
 

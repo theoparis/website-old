@@ -36,15 +36,14 @@
                     </div>
                 </form>
             </div>
-            <div id="githubProjects">
-                <% githubProjects.forEach(project => { %> <% if(!project.fork) {
-                %>
+            <div id="projects">
+                <% projects.forEach(project => { %>
                 <div class="border-panel card mt-4">
                     <div class="card-body">
                         <h2 class="post-title card-title">
                             <a
                                 target="_blank"
-                                href="<%= project.homepage || project.html_url %>"
+                                href="<%= project.homepage || project.codeUrl %>"
                             >
                                 <%= project.name.split("-").map(s =>
                                 s[0].toUpperCase() + s.substr(1)).join(" "); %>
@@ -53,7 +52,7 @@
                         <a
                             class="text-muted card-subtitle"
                             target="_blank"
-                            href="<%= project.html_url %>"
+                            href="<%= project.codeUrl %>"
                             >Source Code</a
                         >
                         <div class="post-description card-text">
@@ -61,7 +60,7 @@
                         </div>
                     </div>
                 </div>
-                <% } %> <% }); %>
+                <% }); %>
             </div>
         </div>
         <%- include("../components/footer") %>

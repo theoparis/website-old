@@ -16,7 +16,7 @@
       <% } %> <% posts.forEach(post => { %>
       <div class="card mt-4">
         <div class="card-body">
-          <a href="/blog/indiv/<%= post.title %>">
+          <a href="/blog/post/<%= post.title %>">
             <h4 class="card-title post-title">
               <%= post.title %>
             </h4>
@@ -25,13 +25,13 @@
             <%= post.createdAt.toLocaleDateString() %><br />
             Author: <%= post.author %>
           </div>
-          <div class="card-text post-content">
-            <%= (post.content.length > 150) ? post.content.substr(0, 150-1) +
-            "..." : post.content %>
+          <div class="card-text post-description">
+            <p><%= post.description %></p>
           </div>
         </div>
       </div>
       <% }) %>
     </main>
+    <%- include("../components/footer") %>
   </body>
 </html>
