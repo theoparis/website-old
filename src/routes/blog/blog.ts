@@ -13,14 +13,14 @@ router.use('/post/:title', async (req, res) => {
   })
 })
 
-router.use('/posts', async (req, res) => {
+router.use('/list', async (req, res) => {
   res.render('blog/blog', {
     posts: await posts.find({}, { sort: { createdAt: -1 } }),
   })
 })
 
 router.use('/', async (req, res) => {
-  res.redirect('/blog/posts')
+  res.redirect('/blog/list')
 })
 
 export const blogRouter = router
