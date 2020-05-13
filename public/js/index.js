@@ -7,7 +7,7 @@ $(function() {
     // $("header").load("/components/header");
 
     // Feather Icons
-    setTimeout(() => feather.replace(), 500)
+    feather.replace()
     $('#brand-name').hover(
         function() {
             $(this).addClass('animated tada')
