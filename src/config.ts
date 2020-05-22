@@ -1,6 +1,5 @@
 import Stripe from 'stripe'
-import { createSchema, Type, typedModel } from 'ts-mongoose';
-import mongoose from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 
 export const dbUrl = process.env.MONGO_URI || 'localhost:27017/website'
 export const permissionLevels = {
@@ -13,34 +12,34 @@ mongoose.connect(dbUrl, (err) => {
   if(err) throw err
 })
 
-const UserSchema = createSchema({
-  name: Type.string({ required: false }),
-  username: Type.string({ required: true }),
-  password: Type.string({ required: false }),
-  provider: Type.string({ required: true }),
-  roles: Type.array({}).of(String),
-  picture: Type.string({ required: false }),
+const UserSchema = new Schema({
+  name: { type: String,required: false },
+  username: { type: String,required: true },
+  password: { type: String,required: false },
+  provider: { type: String, required: true },
+  roles: {type: Array, required: true },
+  picture: { type: String, required: false },
   
 })
 
-const PostSchema = createSchema({
-  title: Type.string({ required: true }),
-  content: Type.string({ required: true }),
-  createdAt: Type.date({ required: true }),
-  author: Type.string({ required: true }),
-  description: Type.string({ required: true }),
+const PostSchema = new Schema({
+  title: { type: String, required: true },
+  content: { type: String, required: true },
+  createdAt: { type: Date, required: true },
+  author: { type: String, required: true },
+  description: { type: String, required: true },
 })
 
-const ProjectSchema = createSchema({
-  url: Type.string({ required: false }),
-  codeUrl: Type.string({ required: false }),
-  name: Type.string({ required: true }),
-  description: Type.string({ required: true }),
+const ProjectSchema = new Schema({
+  url: { type: String, required: false },
+  codeUrl: { type: String, required: false },
+  name: { type: String, required: true },
+  description: { type: String, required: true },
 })
 
-export const User = typedModel('User', UserSchema);
-export const Post = typedModel('Post', PostSchema);
-export const Project = typedModel('Post', ProjectSchema);
+export const User = mongoose.model('User', UserSchema);
+export const Post = mongoose.model('Post', PostSchema);
+export const Project = mongoose.model('Project', ProjectSchema);
 
 const result = require('dotenv').config()
 if (result.error) {
@@ -60,7 +59,7 @@ export const isLoggedIn = req => {
 export const hasRole = async (req, role) => {
   return (
     await User.findOne({ username: req.session.user.username })
-  ).roles.includes(role)
+  ).get("roles").includes(role)
 }
 
 /* // TODO; make this optional

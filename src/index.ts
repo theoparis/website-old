@@ -65,7 +65,7 @@ app.get('/projects', async (req, res) => {
     if (req.query.search)
         projectsList = projectsList.filter(
             (p) =>
-                p.name != '' && p.name.toLowerCase().includes(req.query.search as string)
+                p.get("name") != '' && p.get("name").toLowerCase().includes(req.query.search as string)
         )
     res.status(200).json(projectsList)
 })

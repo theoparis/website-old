@@ -15,19 +15,20 @@ router.get('/google', async (req, res) => {
     if (google && google.email) {
       var existing = await User.findOne({ email: google.email })
       if (existing) {
-        if (existing.provider != 'google') {
-          existing.provider = 'google'
+        if (existing.get("provider") != 'google') {
+          existing.set("provider", "google")
         }
-        existing.picture = google.picture
-        existing.name = google.name
+        existing.set("picture", google.picture)
+        existing.set("name", google.name)
         await existing.save()
+
         req.session.user = existing
         req.session.google = google
         req.session.save(() => {
           res.redirect('/dashboard')
         })
       } else {
-        const user = await User.insert({
+        const user = await User.create({
           email: google.email,
           provider: 'google',
           picture: google.picture,
@@ -68,13 +69,13 @@ router.post('/user/create', async (req, res) => {
     }
 
     User
-      .insert({
+      .create({
         name: req.body.name,
         username: req.body.username,
         password: hash,
         provider: 'none',
         roles: [permissionLevels.user],
-      })
+      },)
       .then(data => {
         if (data) {
           req.session.user = data
@@ -110,7 +111,7 @@ router.post('/user', async (req, res) => {
         res.redirect('/')
       })
     } else {
-      bcrypt.compare(req.body.password, user.password, function(err, result) {
+      bcrypt.compare(req.body.password, user.get("password"), function(err, result) {
         if (result == true) {
           req.session.user = user
           req.session.save(() => res.redirect('/dashboard'))
