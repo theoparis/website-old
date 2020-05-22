@@ -36,7 +36,7 @@ export const hasRole = async (req, role) => {
   ).roles.includes(role)
 }
 
-// TODO; make this optional
+/* // TODO; make this optional
 export const stripe = new Stripe(process.env.stripeKey, { apiVersion: '2020-03-02' })
 
 export const getProducts = async () => {
@@ -51,3 +51,4 @@ export const getProducts = async () => {
   }
   return productList
 }
+ */

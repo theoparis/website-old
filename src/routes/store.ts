@@ -1,9 +1,9 @@
 import express from 'express'
 import monk from 'monk'
 import Stripe from 'stripe'
-import { getProducts, stripe } from '../config'
+// import { getProducts, stripe } from '../config'
 const router = express.Router()
-
+/* 
 router.get('/test', async (req, res) => {
   var result = await stripe.orders.create({
     currency: 'usd',
@@ -28,5 +28,5 @@ router.get('/', async (req, res) => {
   const products = await getProducts()
   res.render('store/store', { user: req.session.user, products })
 })
-
+ */
 export const storeRouter = router
