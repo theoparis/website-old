@@ -1,4 +1,4 @@
-import React, { useState, Component, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css'
 import { motion } from 'framer-motion'
 
@@ -39,12 +39,7 @@ export function Home() {
 									setTimeout(() => history.push(box.link), 1500)
 								}}
 							>
-								<a>
-									<img
-										src={box.image}
-										alt={box.imageDescription || "Box Image"}
-									/>
-								</a>
+								<img src={box.image} alt={box.imageDescription || 'Box Image'} />
 								{/* <img src="{{ box.iconUrl }}" /> */}
 								<h3>{box.title}</h3>
 								<p dangerouslySetInnerHTML={{ __html: box.description }} />

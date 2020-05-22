@@ -1,5 +1,4 @@
-import React, { useState, Component, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import React, { useState, useEffect } from 'react'
 
 import { Container } from 'react-bootstrap'
 import { getProjects } from '../../api'
@@ -45,7 +44,7 @@ export function Projects() {
 								<div className="border-panel card mt-4">
 									<div className="card-body">
 										<h2 className="post-title card-title">
-											<a target="_blank" href={project.url || project.codeUrl}>
+											<a target="_blank" rel="noopener noreferrer" href={project.url || project.codeUrl}>
 												{project.name
 													.split('-')
 													.map((s: string) => s[0].toUpperCase() + s.substr(1))
@@ -54,7 +53,8 @@ export function Projects() {
 										</h2>
 										<a
 											className="text-muted card-subtitle"
-											target="_blank"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
 											href={project.codeUrl || '#'}
 										>
 											Source Code
