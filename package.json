@@ -7,7 +7,7 @@
         "build:server": "tsc -p ./tsconfig.json",
         "server": "npm run build:server && node dist/server.js",
         "start": "run-p server client",
-        "postinstall": "cd client && npm install",
+        "postinstall": "cd client && yarn install",
         "build:client": "cd client && npm run build",
         "build": "npm run build:server && npm run build:client",
         "client": "cd client && npm run start",
