@@ -7,8 +7,9 @@
         "build:server": "tsc -p ./tsconfig.json",
         "server": "npm run build:server && node dist/server.js",
         "start": "run-p server client",
-        "client:build": "cd client && npm run build",
-        "build": "npm run build && npm run client:build",
+        "postinstall": "cd client && npm install",
+        "build:client": "cd client && npm run build",
+        "build": "npm run build:server && npm run build:client",
         "client": "cd client && npm run start",
         "dev": "nodemon"
     },
@@ -47,6 +48,7 @@
         "ytdl-core": "^2.0.1"
     },
     "devDependencies": {
+        "copyfiles": "^2.2.0",
         "ejs-lint": "^1.0.1",
         "npm-run-all": "^4.1.5",
         "ts-node": "^8.8.2"
