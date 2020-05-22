@@ -1,6 +1,6 @@
-import monk from 'monk'
-import bcrypt from 'bcrypt'
 import Stripe from 'stripe'
+import { createSchema, Type, typedModel } from 'ts-mongoose';
+import mongoose from 'mongoose'
 
 export const dbUrl = process.env.MONGO_URI || 'localhost:27017/website'
 export const permissionLevels = {
@@ -9,11 +9,38 @@ export const permissionLevels = {
   admin: 'admin',
 }
 export const saltRounds = 10
-export const db = monk(dbUrl)
-export const posts = db.get('posts')
-export const users = db.get('users')
-export const projects = db.get('projects')
-export const products = db.get('products')
+mongoose.connect(dbUrl, (err) => {
+  if(err) throw err
+})
+
+const UserSchema = createSchema({
+  name: Type.string({ required: false }),
+  username: Type.string({ required: true }),
+  password: Type.string({ required: false }),
+  provider: Type.string({ required: true }),
+  roles: Type.array({}).of(String),
+  picture: Type.string({ required: false }),
+  
+})
+
+const PostSchema = createSchema({
+  title: Type.string({ required: true }),
+  content: Type.string({ required: true }),
+  createdAt: Type.date({ required: true }),
+  author: Type.string({ required: true }),
+  description: Type.string({ required: true }),
+})
+
+const ProjectSchema = createSchema({
+  url: Type.string({ required: false }),
+  codeUrl: Type.string({ required: false }),
+  name: Type.string({ required: true }),
+  description: Type.string({ required: true }),
+})
+
+export const User = typedModel('User', UserSchema);
+export const Post = typedModel('Post', PostSchema);
+export const Project = typedModel('Post', ProjectSchema);
 
 const result = require('dotenv').config()
 if (result.error) {
@@ -32,7 +59,7 @@ export const isLoggedIn = req => {
  */
 export const hasRole = async (req, role) => {
   return (
-    await users.findOne({ username: req.session.user.username })
+    await User.findOne({ username: req.session.user.username })
   ).roles.includes(role)
 }
 

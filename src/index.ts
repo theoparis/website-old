@@ -2,14 +2,13 @@
 // Here we use the import statement for typescript
 import express from 'express'
 import fetch from 'node-fetch'
-import monk from 'monk'
 import serverless from 'serverless-http'
 import flash from 'express-flash'
 import session from 'express-session'
 import cors from 'cors'
 import ytdl from 'ytdl-core'
 
-import { projects } from './config'
+import { Project } from './config'
 import { authRouter } from './routes/auth'
 import { blogRouter } from './routes/blog/blog'
 
@@ -62,11 +61,11 @@ app.use('/auth', authRouter)
 app.use('/store', storeRouter)
 app.use('/blog', blogRouter)
 app.get('/projects', async (req, res) => {
-    var projectsList = await projects.find({})
+    var projectsList = await Project.find({})
     if (req.query.search)
         projectsList = projectsList.filter(
             (p) =>
-                p.name != '' && p.name.toLowerCase().includes(req.query.search)
+                p.name != '' && p.name.toLowerCase().includes(req.query.search as string)
         )
     res.status(200).json(projectsList)
 })

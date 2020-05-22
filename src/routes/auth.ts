@@ -1,9 +1,8 @@
 import express from 'express'
-import monk from 'monk'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import url from 'url'
 
-import { users, permissionLevels, saltRounds } from '../config'
+import { User, permissionLevels, saltRounds } from '../config'
 import { getGoogleAccountFromCode } from '../google-util'
 
 const router = express.Router()
@@ -14,7 +13,7 @@ router.get('/google', async (req, res) => {
   if (code) {
     const google = await getGoogleAccountFromCode(code)
     if (google && google.email) {
-      var existing = await users.findOne({ email: google.email })
+      var existing = await User.findOne({ email: google.email })
       if (existing) {
         if (existing.provider != 'google') {
           existing.provider = 'google'
@@ -28,7 +27,7 @@ router.get('/google', async (req, res) => {
           res.redirect('/dashboard')
         })
       } else {
-        const user = await users.insert({
+        const user = await User.insert({
           email: google.email,
           provider: 'google',
           picture: google.picture,
@@ -55,7 +54,7 @@ router.get('/google', async (req, res) => {
 // registration
 router.post('/user/create', async (req, res) => {
   bcrypt.hash(req.body.password, saltRounds, async (err, hash) => {
-    let existing = await users.findOne({ username: req.body.username })
+    let existing = await User.findOne({ username: req.body.username })
     if (existing) {
       res.redirect(
         url.format({
@@ -68,7 +67,7 @@ router.post('/user/create', async (req, res) => {
       return
     }
 
-    users
+    User
       .insert({
         name: req.body.name,
         username: req.body.username,
@@ -103,8 +102,8 @@ router.get('/logout', (req, res) => {
   }
 })
 
-router.post('/user', (req, res) => {
-  users.findOne({ username: req.body.username }).then(function(user) {
+router.post('/user', async (req, res) => {
+  User.findOne({ username: req.body.username }).then(function(user) {
     if (!user) {
       req.session.user = null
       req.session.save(() => {

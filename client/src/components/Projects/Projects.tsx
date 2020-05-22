@@ -44,7 +44,7 @@ export function Projects() {
 								<div className="border-panel card mt-4">
 									<div className="card-body">
 										<h2 className="post-title card-title">
-											<a target="_blank" rel="noopener noreferrer" href={project.url || project.codeUrl}>
+											<a target="_blank" rel="noopener noreferrer" href={project.url || project.codeUrl || "#"}>
 												{project.name
 													.split('-')
 													.map((s: string) => s[0].toUpperCase() + s.substr(1))
@@ -55,7 +55,7 @@ export function Projects() {
 											className="text-muted card-subtitle"
                                             target="_blank"
                                             rel="noopener noreferrer"
-											href={project.codeUrl || '#'}
+											href={project.codeUrl || "#"}
 										>
 											Source Code
 										</a>
