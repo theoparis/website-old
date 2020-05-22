@@ -41,6 +41,7 @@
         "node-fetch": "^2.6.0",
         "nodemailer": "^6.4.5",
         "nodemon": "^2.0.2",
+        "serverless-http": "^2.5.0",
         "stripe": "^8.37.0",
         "swig": "^1.4.2",
         "typescript": "^3.8.3",
