@@ -6,20 +6,12 @@ import monk from 'monk'
 import flash from 'express-flash'
 import session from 'express-session'
 import cors from 'cors'
-import swig from 'swig'
-import fs from 'fs'
-import vhost from 'vhost-ts'
-import https from 'https'
-import cookieSession from 'cookie-session'
 import ytdl from 'ytdl-core'
-import { downloadOptions, videoFormat } from 'ytdl-core'
 
 import { projects } from './config'
 import { authRouter } from './routes/auth'
 import { blogRouter } from './routes/blog/blog'
 
-import path from 'path'
-import { throwOutErrorRouter } from './routes/throw-out-error'
 import { storeRouter } from './routes/store'
 import { urlGoogle } from './google-util'
 const app = express()
@@ -47,9 +39,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(flash())
 
-app.use('/api/auth', authRouter)
-app.use('/store', storeRouter)
-
 app.get('/convert/ytmp3', (req, res) => {
     const url = req.query.url.toString()
     res.header('Content-Disposition', 'attachment; filename="audio.mp3"')
@@ -63,50 +52,28 @@ app.get('/convert/ytmp4', (req, res) => {
     res.header('Content-Disposition', 'attachment; filename="video.mp4"')
     ytdl(url, {}).pipe(res)
 })
-/* 
-//TODO: Doesn't Work Yet
-app.get("*", (req, res, next) => {
-    // Add current page for use in header
-    res.locals.pageUrl = req.flash("pageUrl", req.url)
-    next()
-}) */
 
-// Subdomains
-app.use(vhost('throw-out-error.dev', throwOutErrorRouter))
-// ----------
-app.use('/toe', throwOutErrorRouter)
+app.get('/', (req, res) => {
+    res.status(200).json({ message: "Hello, world! This is an api." })
+})
+
+app.use('/auth', authRouter)
+app.use('/store', storeRouter)
 app.use('/blog', blogRouter)
 app.get('/projects', async (req, res) => {
-    // Fetch github projects from my dev team
-    var githubProjects = await (
-        await fetch(
-            'http://api.github.com/users/throw-out-error/repos?sort=pushed'
-        )
-    ).json()
-    if (req.query.search)
-        githubProjects = githubProjects.filter(
-            (p) =>
-                p.name != '' && p.name.toLowerCase().includes(req.query.search)
-        )
-
     var projectsList = await projects.find({})
     if (req.query.search)
         projectsList = projectsList.filter(
             (p) =>
                 p.name != '' && p.name.toLowerCase().includes(req.query.search)
         )
-    const projectsAmount = projectsList.length + githubProjects.length
-    res.render('projects/index', {
-        projectsWorkedOn: projectsAmount,
-        projects: projectsList,
-        githubProjects,
-    })
+    res.status(200).json(projectsList)
 })
 
 app.get('/dashboard/google', (req, res) => {
     res.render('dashboard/google', { googleUrl: urlGoogle() })
 })
-
+/* 
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, '..', 'public'))
 
@@ -148,14 +115,14 @@ app.use('*', (req, res, next) => {
     } else {
         next()
     }
-})
+}) */
 
 // Error handling
 const error404 = (req, res, html) => {
     res.status(404).send('<h1>404</h1><h2>Requested Resource Not Found</h2>')
 }
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 8080
 
 app.listen(port, () => {
     console.log(`Express server listening on 0.0.0.0:${port}`)

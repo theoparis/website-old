@@ -4,9 +4,12 @@
     "description": "",
     "main": "dist/server.js",
     "scripts": {
-        "build": "tsc -p ./tsconfig.json",
-        "start": "npm run serve",
-        "serve": "node dist/server.js",
+        "build:server": "tsc -p ./tsconfig.json",
+        "server": "npm run build:server && node dist/server.js",
+        "start": "run-p npm run server npm run client",
+        "client:build": "cd client && npm run build",
+        "build": "npm run build && npm run client:build",
+        "client": "cd client && npm run start",
         "dev": "nodemon"
     },
     "keywords": [],
