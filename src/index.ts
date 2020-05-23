@@ -38,8 +38,9 @@ app.use(
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(flash())
+const router = express.Router();
 
-app.get('/convert/ytmp3', (req, res) => {
+router.get('/convert/ytmp3', (req, res) => {
     const url = req.query.url.toString()
     res.header('Content-Disposition', 'attachment; filename="audio.mp3"')
     ytdl(url, {
@@ -47,20 +48,20 @@ app.get('/convert/ytmp3', (req, res) => {
     }).pipe(res)
 })
 
-app.get('/convert/ytmp4', (req, res) => {
+router.get('/convert/ytmp4', (req, res) => {
     const url = req.query.url.toString()
     res.header('Content-Disposition', 'attachment; filename="video.mp4"')
     ytdl(url, {}).pipe(res)
 })
 
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
     res.status(200).json({ message: "Hello, world! This is an api." })
 })
 
-app.use('/auth', authRouter)
-app.use('/store', storeRouter)
-app.use('/blog', blogRouter)
-app.get('/projects', async (req, res) => {
+router.use('/auth', authRouter)
+router.use('/store', storeRouter)
+router.use('/blog', blogRouter)
+router.get('/projects', async (req, res) => {
     var projectsList = await Project.find({})
     if (req.query.search)
         projectsList = projectsList.filter(
@@ -70,7 +71,7 @@ app.get('/projects', async (req, res) => {
     res.status(200).json(projectsList)
 })
 
-app.get('/dashboard/google', (req, res) => {
+router.get('/dashboard/google', (req, res) => {
     res.render('dashboard/google', { googleUrl: urlGoogle() })
 })
 /* 
@@ -122,6 +123,8 @@ const error404 = (req, res, html) => {
     res.status(404).send('<h1>404</h1><h2>Requested Resource Not Found</h2>')
 }
 
+app.use("/api", router)
+app.use("*", error404)
 export const App = app
 export const handler = serverless(app)
 
