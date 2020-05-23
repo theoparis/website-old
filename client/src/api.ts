@@ -1,4 +1,4 @@
-export const API = "http://localhost:8080"
+import { apiUrl } from "./config"
 
 export function getBoxes(): any {
     // TODO: add api
@@ -14,6 +14,6 @@ export function getBoxes(): any {
 
 export function getProjects(): Promise<any[]> {
     return new Promise((resolve, reject) => {
-        fetch((process.env.api || API) + "/projects").then(res => res.json()).then(resolve).catch(reject)
+        fetch((apiUrl) + "/projects").then(res => res.json()).then(resolve).catch(reject)
     })
 }
