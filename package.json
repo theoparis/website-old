@@ -29,7 +29,7 @@
         "express": "^4.17.1",
         "express-flash": "0.0.2",
         "express-session": "^1.17.0",
-        "googleapis": "^50.0.0",
+        "googleapis": "^52.1.0",
         "https": "^1.0.0",
         "monk": "^7.1.2",
         "node-fetch": "^2.6.0",
