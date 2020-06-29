@@ -22,7 +22,6 @@ export function Home() {
 
     useEffect(() => {
         setBoxes(getBoxes());
-        return () => {};
     }, []);
 
     const history = useHistory();
