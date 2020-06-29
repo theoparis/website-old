@@ -2,11 +2,9 @@ import React, { Component } from "react";
 
 import { Container } from "react-bootstrap";
 import { getSinglePost } from "../../api";
-import { RouteProps } from "react-router-dom";
 
 export class Post extends Component<any, any> {
     componentDidMount() {
-        const { handle } = this.props.match.params;
         getSinglePost().then((post) => this.setState({ post }));
     }
 

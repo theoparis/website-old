@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import "./Header.css";
-import { Nav, Collapse } from "react-bootstrap";
-import { Menu } from "react-feather";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 

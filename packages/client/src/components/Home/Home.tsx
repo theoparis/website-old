@@ -6,19 +6,14 @@ import { getBoxes } from "../../api";
 
 import "./App.css";
 
-const bannerStyle = {
+/* const bannerStyle = {
     height: "450px",
     top: "25px",
     width: "100%",
     position: "relative",
-/*     backgroundImage: "/assets/creepinson.png",
-    backgroundRepeat: "noRepeat",
-    backgroundSize: "contain",
-    backgroundAttachment: "scroll",
-    backgroundPosition: "center", */
     color: "#fff",
     marginBottom: "25px",
-};
+}; */
 
 
 export function Home() {
