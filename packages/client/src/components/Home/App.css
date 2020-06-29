@@ -1,0 +1,13 @@
+.showcase-banner {
+    height: 450px;
+    top: 25px;
+    width: 100%;
+    position: relative;
+    background-image: url("/assets/creepinson.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-attachment: scroll;
+    background-position: center;
+    color: white;
+    margin-bottom: 25px;
+}
