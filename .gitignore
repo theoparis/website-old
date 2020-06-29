@@ -3,6 +3,7 @@
 node_modules
 package-lock.json
 .pnp
+.ultra.cache.json
 .pnp.js
 
 # testing
