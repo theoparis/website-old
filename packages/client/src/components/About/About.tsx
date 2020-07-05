@@ -30,7 +30,7 @@ export function About() {
                     </p>
                     <h2 className="page-title">Programming</h2>
                     <p>
-                        I have been coding for about 3 years, and have worked
+                        I have been coding for about 3-4 years, and have worked
                         with many programming languages, such as Javascript,
                         Typescript, Python, HTML + CSS, PHP, and a little bit of
                         C++ and Assembly. Some of the frameworks I have used
@@ -76,9 +76,19 @@ export function About() {
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            my YouTube videos here
+                            my YouTube videos here.
+                        </a>{" "}
+                        If you are looking for a way to contact me, you can
+                        email me using{" "}
+                        <a
+                            href="mailto:theo@throw-out-error.dev"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            theo@throw-out-error.dev
                         </a>
-                        .
+                        . You can also contact me through discord with my tag:{" "}
+                        <strong>Creepinson#2817</strong>.
                     </p>
                 </Container>
             </main>

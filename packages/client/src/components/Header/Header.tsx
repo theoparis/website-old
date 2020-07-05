@@ -22,19 +22,6 @@ const styles = {
 };
 
 export class Header extends Component {
-    state: any;
-    constructor(props) {
-        super(props);
-        this.state = {
-            menu: true,
-        };
-        this.toggleMenu = this.toggleMenu.bind(this);
-    }
-
-    toggleMenu() {
-        this.setState({ menu: !this.state.menu });
-    }
-
     render() {
         return (
             <div>
@@ -44,36 +31,23 @@ export class Header extends Component {
                             <h1 id="brand-name">Theo Paris Designs</h1>
                         </Navbar.Brand>
                     </div>
-                    {/* <div
-                        style={styles.navbarToggler}
-                        data-toggle="collapse"
-                        data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                        onClick={this.toggleMenu}
-                    >
-                        <Menu />
-                    </div> */}
                     <Navbar expand="lg" className="navbar">
-                        {/* <Collapse dimension="width" in={this.state.menu}> */}
-                            <div>
-                                <Nav
-                                    className="nav navbar-nav flex-row text-center"
-                                    defaultActiveKey="/"
-                                >
-                                    <Link style={styles.navLink} to="/about">
-                                        About
-                                    </Link>
-                                    <Link style={styles.navLink} to="/projects">
-                                        Projects
-                                    </Link>
-                                    <Link style={styles.navLink} to="/blog">
-                                        Blog
-                                    </Link>
-                                </Nav>
-                            </div>
-                        {/* </Collapse> */}
+                        <div>
+                            <Nav
+                                className="nav navbar-nav flex-row text-center"
+                                defaultActiveKey="/"
+                            >
+                                <Link style={styles.navLink} to="/about">
+                                    About
+                                </Link>
+                                <Link style={styles.navLink} to="/projects">
+                                    Projects
+                                </Link>
+                                <Link style={styles.navLink} to="/blog">
+                                    Blog
+                                </Link>
+                            </Nav>
+                        </div>
                     </Navbar>
                 </header>
                 <div id="error" style={{ display: "none" }}>
