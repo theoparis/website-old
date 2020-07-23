@@ -1,5 +1,5 @@
 [build]
-command = "pnpm build"
+command = "npm build"
 functions = "packages/server/dist"
 publish = "packages/client/build"
 [build.environment]
