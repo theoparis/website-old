@@ -9,8 +9,7 @@ import { Request, Response, NextFunction } from "express";
 
 const result = dotenv.config();
 if (result.error) {
-    console.log("Found dotenv error: ");
-    console.error(result.error);
+    console.log(`Failed to parse .env file`);
 } else {
     process.env = result.parsed || process.env;
 }

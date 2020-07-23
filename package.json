@@ -4,26 +4,23 @@
     "description": "",
     "private": true,
     "main": "dist/server.js",
-    "workspaces": [
-        "packages/*"
-    ],
     "scripts": {
         "lint": "eslint packages/*/src/**/*.{ts,tsx} --quiet --fix",
-        "postinstall": "eisd 'yarn install' packages/* --ignoreRegex '^warning' -a && yarn run lint",
-        "start": "ultra -r start",
-        "build": "ultra -b -r build"
+        "prepare": "pnpm run lint",
+        "start": "pnpm -r run start",
+        "prebuild": "[[ $CI = true ]] && npx pnpm install --store=node_modules/.pnpm-store || echo skiping pnpm install",
+        "build": "pnpm -r run build"
     },
     "keywords": [],
     "author": "Theo Paris",
     "license": "MIT",
     "devDependencies": {
-        "@typescript-eslint/eslint-plugin": "^3.3.0",
-        "@typescript-eslint/parser": "^3.3.0",
-        "eisd": "^1.5.0",
-        "eslint": "^6.8.0",
+        "@typescript-eslint/eslint-plugin": "^3.7.0",
+        "@typescript-eslint/parser": "^3.7.0",
+        "eslint": "^6.6.0",
         "eslint-config-prettier": "^6.11.0",
         "eslint-plugin-prettier": "^3.1.4",
-        "prettier": "^2.0.5",
-        "ultra-runner": "^3.5.0"
+        "pnpm": "^5.4.0",
+        "prettier": "^2.0.5"
     }
 }

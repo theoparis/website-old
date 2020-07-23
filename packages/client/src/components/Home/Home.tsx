@@ -42,6 +42,7 @@ export function Home() {
                     <section id="boxes">
                         {boxes.map((box: any) => (
                             <motion.div
+                                key={box.link}
                                 className="box"
                                 initial={{ scale: 1, rotate: 0 }}
                                 animate={{
