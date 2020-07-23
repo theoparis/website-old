@@ -6,10 +6,10 @@
     "main": "dist/server.js",
     "scripts": {
         "lint": "eslint packages/*/src/**/*.{ts,tsx} --quiet --fix",
-        "prepare": "pnpm run lint",
-        "start": "pnpm -r run start",
+        "prepare": "npx pnpm run lint",
+        "start": "npx pnpm -r run start",
         "prebuild": "[[ $CI = true ]] && npx pnpm install --store=node_modules/.pnpm-store || echo skiping pnpm install",
-        "build": "pnpm -r run build"
+        "build": "npx pnpm -r run build"
     },
     "keywords": [],
     "author": "Theo Paris",
