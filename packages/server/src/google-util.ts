@@ -4,7 +4,7 @@ import fetch from 'node-fetch'
 const googleConfig = {
   clientId: process.env.googleId, // e.g. asdfghjkljhgfdsghjk.apps.googleusercontent.com
   clientSecret: process.env.googleSecret, // e.g. _ASDFA%DFASDFASDFASD#FAD-
-  redirect: 'https://creepinson.xyz/api/auth/google', // this must match your google api settings
+  redirect: 'https://theoparis.com/api/auth/google', // this must match your google api settings
 }
 
 export interface AuthUrlOptions {

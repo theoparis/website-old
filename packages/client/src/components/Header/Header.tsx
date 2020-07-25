@@ -27,8 +27,14 @@ export class Header extends Component {
             <div>
                 <header className="flex-column text-center">
                     <div id="branding">
-                        <Navbar.Brand className="highlight" href="/">
-                            <h1 id="brand-name">Theo Paris Designs</h1>
+                        <Navbar.Brand className="highlight">
+                            <Link
+                                to="/"
+                                style={{ textDecoration: "none" }}
+                            >
+                                {" "}
+                                <h1 id="brand-name">Theo Paris Designs</h1>
+                            </Link>
                         </Navbar.Brand>
                     </div>
                     <Navbar expand="lg" className="navbar">
@@ -45,6 +51,9 @@ export class Header extends Component {
                                 </Link>
                                 <Link style={styles.navLink} to="/blog">
                                     Blog
+                                </Link>
+                                <Link style={styles.navLink} to="/dashboard">
+                                    Dashboard
                                 </Link>
                             </Nav>
                         </div>

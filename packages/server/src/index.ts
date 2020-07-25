@@ -1,7 +1,5 @@
-// import dependencies
-// Here we use the import statement for typescript
+// Import dependencies
 import express from "express";
-import fetch from "node-fetch";
 import serverless from "serverless-http";
 import flash from "express-flash";
 import session from "express-session";
@@ -17,11 +15,13 @@ import { storeRouter } from "./routes/store";
 import { urlGoogle } from "./google-util";
 import { initializePassport } from "./config";
 
+// Create http server using express
 const app = express();
 
-/* If we don't use this, accessing the api from the frontend
+/* 
+If we don't use this, accessing the api from the frontend
 will give us a cross origin (cors) error because they are on different ports.
-Also has to be first in order for it to work.
+Also has to be one of the first routes in order for it to work.
 */
 app.use(cors());
 app.use(
@@ -61,7 +61,7 @@ router.get("/convert/ytmp4", (req, res) => {
     ytdl(url, {}).pipe(res);
 });
 
-router.get("/", (req, res) => {
+router.get("/", (_, res) => {
     res.json({ message: "Hello, world! This is an api." });
 });
 
@@ -82,7 +82,7 @@ router.get("/projects", async (req, res) => {
     res.json(projectsList);
 });
 
-router.get("/dashboard/google", (req, res) => {
+router.get("/dashboard/google", (_, res) => {
     res.render("dashboard/google", { googleUrl: urlGoogle() });
 });
 /* 
@@ -135,6 +135,11 @@ const error404 = (req, res, html) => {
 };
 
 app.use("/api", router);
+
+/*
+ Handle all routes that do not match the others.
+ If this is the last route, it can be used as a 404 handler.
+ */
 app.use("*", error404);
 export const App = app;
 export const handler = serverless(app);

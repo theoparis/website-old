@@ -55,7 +55,7 @@ router.post("/admin/createPost", authenticate('jwt', { session: true }), async (
     }
 });
 
-export const isValidPost = (json) => {
+export const isValidPost = (json: any) => {
     // Verifying that the post info is entered properly
     return json.title && json.title != "" && json.content && json.content != "";
 };

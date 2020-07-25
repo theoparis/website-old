@@ -125,6 +125,7 @@ router.post(
                 const token = jwt.sign({ user }, "12 34", {
                     expiresIn: 3600, // 1week  604800
                 });
+                // TODO: strip password from user response
                 res.status(200).json({
                     success: true,
                     token,

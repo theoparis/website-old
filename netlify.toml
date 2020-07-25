@@ -2,8 +2,9 @@
 command = "npm run build"
 functions = "packages/server/dist"
 publish = "packages/client/build"
+
 [build.environment]
-    NPM_FLAGS="--prefix=/"
+NPM_FLAGS = "--prefix=/"
 
 [[redirects]]
 from = "/api/*"

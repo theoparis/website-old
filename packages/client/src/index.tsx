@@ -14,6 +14,8 @@ import Footer from "./components/Footer";
 import { Projects } from "./components/Projects/Projects";
 import { Blog } from "./components/Blog/Blog";
 import { Post } from "./components/Blog/Post";
+import { Dashboard } from "./components/Auth/Dashboard";
+import { Register } from "./components/Auth/Register";
 
 const rootElement = document.getElementById("root");
 if (rootElement!.hasChildNodes()) {
@@ -47,6 +49,12 @@ if (rootElement!.hasChildNodes()) {
                 </Route>
                 <Route exact path="/projects">
                     <Projects />
+                </Route>
+                <Route exact path="/dashboard">
+                    <Dashboard />
+                </Route>
+                <Route exact path="/register">
+                    <Register />
                 </Route>
                 <Route exact path="/blog">
                     <Blog />
