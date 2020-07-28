@@ -48,21 +48,26 @@ render(
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-            <Route exact path="/blog" component={Blog} />
             <Route exact path="/admin" component={AdminDashboard} />
             <Route exact path="/admin/blog" component={BlogAdmin} />
             <Route exact path="/admin/blog/new" component={CreatePost} />
-
+            <Route path="/blog" component={Blog} />
             <Route
                 path="/blog/archive/:date"
                 render={(props) => (
-                    <Blog archiveFilter={props.match.params.date} />
+                    <Blog
+                        location={props.location}
+                        archiveFilter={props.match.params.date}
+                    />
                 )}
             />
             <Route
                 path="/blog/category/:category"
                 render={(props) => (
-                    <Blog category={props.match.params.category} />
+                    <Blog
+                        location={props.location}
+                        category={props.match.params.category}
+                    />
                 )}
             />
             <Route path="/blog/post/:id" component={Post} />

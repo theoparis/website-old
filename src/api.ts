@@ -160,13 +160,14 @@ export function getProjects(): Promise<any[]> {
     });
 }
 
-export function getPosts(
-    dateFilter?: string,
-    category?: string,
-): Promise<any[]> {
+export function getPosts(opts: {
+    dateFilter?: string;
+    category?: string;
+    query?: string;
+}): Promise<any[]> {
     const formattedUrl = `${apiUrl}/blog/posts?date=${
-        dateFilter || ""
-    }&category=${category || ""}`;
+        opts.dateFilter || ""
+    }&category=${opts.category || ""}&search=${opts.query || ""}`;
 
     return new Promise((resolve, reject) => {
         console.log(formattedUrl);

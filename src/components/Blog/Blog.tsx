@@ -7,6 +7,7 @@ export class Blog extends Component<
     {
         archiveFilter?: string;
         category?: string;
+        location: any;
     },
     { posts: any[]; query: string }
 > {
@@ -19,7 +20,11 @@ export class Blog extends Component<
     }
 
     componentDidMount() {
-        getPosts(this.props.archiveFilter, this.props.category)
+        const params = new URLSearchParams(this.props.location.search);
+        getPosts({
+            ...this.props,
+            query: params.get("search") || "",
+        })
             .then((newPosts) => {
                 console.log(newPosts);
                 this.setState({ posts: newPosts });
