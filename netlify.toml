@@ -1,6 +1,6 @@
 [build]
 command = "npm run build"
-functions = "packages/server/dist"
+# functions = "packages/server/dist"
 publish = "packages/client/build"
 
 [build.environment]
