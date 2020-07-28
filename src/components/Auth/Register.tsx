@@ -4,13 +4,14 @@ import { sendRegistrationRequest } from "../../api";
 
 export class Register extends Component<
     any,
-    { username: string; password: string }
+    { username: string; password: string, name: string }
 > {
     history: any;
     constructor(props: any) {
         super(props);
-        this.state = { username: "", password: "" };
+        this.state = { username: "", password: "", name: "" };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleNameChange = this.handleNameChange.bind(this);
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
     }
@@ -19,14 +20,19 @@ export class Register extends Component<
         this.setState({ username: e.target.value });
     }
 
+    handleNameChange(e: any) {
+        this.setState({ name: e.target.value });
+    }
+
     handlePasswordChange(e: any) {
         this.setState({ password: e.target.value });
     }
 
     handleSubmit(event: any) {
         event.preventDefault();
-        sendRegistrationRequest(this.state.username, this.state.password).then(
+        sendRegistrationRequest(this.state).then(
             (result) => {
+                console.log(result)
                 if (!result.error) this.props.history.push("/dashboard");
                 else this.props.history.push("/register");
             },
@@ -40,15 +46,15 @@ export class Register extends Component<
                     <Container>
                         <h2>Register</h2>
                         <Form onSubmit={this.handleSubmit}>
-                            <Form.Group>
+                            <Form.Group controlId="name">
                                 <Form.Label>Full Name:</Form.Label>
                                 <Form.Control
                                     type="text"
-                                    name="username"
-                                    onChange={this.handleUsernameChange}
+                                    name="name"
+                                    onChange={this.handleNameChange}
                                 />
                             </Form.Group>
-                            <Form.Group>
+                            <Form.Group controlId="username">
                                 <Form.Label>Email:</Form.Label>
                                 <Form.Control
                                     type="text"
@@ -58,7 +64,7 @@ export class Register extends Component<
                                 />
                                 <small style={{ color: "grey" }}>Required</small>
                             </Form.Group>
-                            <Form.Group>
+                            <Form.Group controlId="password">
                                 <Form.Label>Password:</Form.Label>
                                 <Form.Control
                                     type="password"

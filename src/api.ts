@@ -91,12 +91,14 @@ export async function sendLoginRequest(username: string, password: string) {
             return {
                 error: null,
                 response: result,
+                json,
             };
         } else {
             setUser(null);
             return {
                 error: "login error",
                 response: result,
+                json,
             };
         }
     } catch (e) {
@@ -107,30 +109,32 @@ export async function sendLoginRequest(username: string, password: string) {
     }
 }
 
-export async function sendRegistrationRequest(
-    username: string,
-    password: string,
-) {
+export async function sendRegistrationRequest(data: {
+    username: string;
+    password: string;
+    name?: string;
+}) {
     try {
         const result = await fetch(apiUrl + "/auth/user/create", {
-            body: JSON.stringify({
-                username,
-                password,
-            }),
+            body: JSON.stringify(data),
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
             method: "POST",
-            credentials: "include"
+            credentials: "include",
         });
         const json = await result.json();
         if (result.status === 200) {
             setUser(json.user);
-            return "";
+            return { error: null, response: result, json };
         } else {
             setUser(null);
-            return "login error";
+            return { error: "login error", response: result, json };
         }
     } catch (e) {
         console.error(e);
-        return e.message;
+        return { error: e.message };
     }
 }
 
