@@ -3,6 +3,11 @@ import { Link } from "react-router-dom";
 import { isLoggedIn, getUser, hasRole, logout } from "../../api";
 import { Container, Form } from "react-bootstrap";
 
+const mbStyle = {
+    display: "block",
+    marginBottom: "15px",
+};
+
 export class Dashboard extends Component<any, { user: any }> {
     constructor(props: any) {
         super(props);
@@ -26,11 +31,25 @@ export class Dashboard extends Component<any, { user: any }> {
                 <main id="content">
                     <Container>
                         {isLoggedIn() ? (
-                            <div>
-                                <h3>
+                            <div className="dashboard">
+                                <h3 style={mbStyle}>
                                     Welcome,{" "}
                                     {getUser().name || getUser().username}.
                                 </h3>
+                                {hasRole("admin") ? (
+                                    <Link style={mbStyle} to="/admin">
+                                        Admin Dashboard
+                                    </Link>
+                                ) : (
+                                    <div />
+                                )}
+                                {hasRole("writer") ? (
+                                    <Link style={mbStyle} to="/admin/blog">
+                                        Blog Administration Dashboard
+                                    </Link>
+                                ) : (
+                                    <div />
+                                )}
                                 <Form onSubmit={this.logOut.bind(this)}>
                                     <Form.Group>
                                         <button
@@ -47,12 +66,6 @@ export class Dashboard extends Component<any, { user: any }> {
                                 <Link to="/login">Login</Link>
                                 <br />
                                 <Link to="/register">Register</Link>
-                                <br />
-                                {hasRole("admin") ? (
-                                    <Link to="/admin">Admin Dashboard</Link>
-                                ) : (
-                                    <div />
-                                )}
                                 <br />
                             </div>
                         )}

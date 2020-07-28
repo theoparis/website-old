@@ -28,6 +28,49 @@ export async function logout() {
     }
 }
 
+export async function createPost(data: {
+    title: string;
+    description: string;
+    content: string;
+}) {
+    try {
+        const result = await fetch(apiUrl + "/blog/post", {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            credentials: "include",
+        });
+        const json = await result.json();
+        if (result.status === 201) {
+            return {
+                error: null,
+                response: result,
+                json,
+            };
+        } else if (result.status === 401) {
+            return {
+                error: "authentication error",
+                response: result,
+                json,
+            };
+        } else {
+            return {
+                error: "other error",
+                response: result,
+                json,
+            };
+        }
+    } catch (e) {
+        console.error(e);
+        return {
+            error: e.message,
+        };
+    }
+}
+
 export async function sendLoginRequest(username: string, password: string) {
     try {
         const result = await fetch(apiUrl + "/auth/user", {
@@ -40,7 +83,7 @@ export async function sendLoginRequest(username: string, password: string) {
                 Accept: "application/json",
                 "Content-Type": "application/json",
             },
-            credentials: "same-origin",
+            credentials: "include",
         });
         const json = await result.json();
         if (result.status === 200) {
@@ -75,6 +118,7 @@ export async function sendRegistrationRequest(
                 password,
             }),
             method: "POST",
+            credentials: "include"
         });
         const json = await result.json();
         if (result.status === 200) {

@@ -17,6 +17,8 @@ import { Post } from "./components/Blog/Post";
 import { Dashboard } from "./components/Auth/Dashboard";
 import { Register } from "./components/Auth/Register";
 import { Login } from "./components/Auth/Login";
+import AdminDashboard from "./components/Admin";
+import BlogAdmin, { CreatePost } from "./components/Admin/BlogAdmin";
 
 render(
     <BrowserRouter>
@@ -47,6 +49,10 @@ render(
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/blog" component={Blog} />
+            <Route exact path="/admin" component={AdminDashboard} />
+            <Route exact path="/admin/blog" component={BlogAdmin} />
+            <Route exact path="/admin/blog/new" component={CreatePost} />
+
             <Route
                 path="/blog/archive/:date"
                 render={(props) => (

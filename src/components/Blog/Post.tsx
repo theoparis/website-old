@@ -57,7 +57,17 @@ export class Post extends Component<any, { post: any }> {
                                                 Created By {post.author} At{" "}
                                                 {dateToString(post.createdAt) +
                                                     " "}
-                                                In {post.category || "Uncategorized"}
+                                            </a>
+                                            <a
+                                                className="text-muted card-subtitle"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                href={
+                                                    "/blog/category/" +
+                                                    post.category
+                                                }
+                                            >
+                                                In {post.category}
                                             </a>
                                             <div className="post-content card-text">
                                                 <p
