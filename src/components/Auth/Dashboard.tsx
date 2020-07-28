@@ -4,22 +4,21 @@ import { isLoggedIn, currentUser, hasRole } from "../../api";
 
 export class Dashboard extends Component {
     render() {
-        return (
-            <div>
-                {isLoggedIn() ? (
+        if (isLoggedIn()) {
+            return (
+                <div>
                     <h3>Welcome, {currentUser.username}</h3>
-                ) : (
+                </div>
+            );
+        } else
+            return (
+                <div>
                     <div>
                         <Link to="/login">Login</Link>
                         <Link to="/register">Register</Link>
+                        <Link to="/admin">Admin  Dashboard</Link>
                     </div>
-                )}
-                {hasRole("admin") ? (
-                    <Link to="/admin">Admin Dashboard</Link>
-                ) : (
-                    <div />
-                )}
-            </div>
-        );
+                </div>
+            );
     }
 }

@@ -56,19 +56,57 @@ export function getProjects(): Promise<any[]> {
     });
 }
 
-export function getPosts(): Promise<any[]> {
+export function getPosts(
+    dateFilter?: string,
+    category?: string,
+): Promise<any[]> {
+    const formattedUrl = `${apiUrl}/blog/posts?date=${
+        dateFilter || ""
+    }&category=${category || ""}`;
+
     return new Promise((resolve, reject) => {
-        fetch(apiUrl + "/blog/posts")
+        console.log(formattedUrl);
+        fetch(formattedUrl)
             .then((res) => res.json())
+            // Convert date string to js Date class
+            .then((posts) =>
+                posts.map((p: any) => ({
+                    ...p,
+                    createdAt: new Date(p.createdAt),
+                })),
+            )
             .then(resolve)
             .catch(reject);
     });
 }
 
-export function getSinglePost(): Promise<any[]> {
+export function dateToString(dateObj: Date) {
+    const monthNames = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+    ];
+    let month = monthNames[dateObj.getMonth()];
+    let day = String(dateObj.getDate()).padStart(2, "0");
+    let year = dateObj.getFullYear();
+    let output = month + "\n" + day + "," + year;
+    return output;
+}
+
+export function getSinglePost(id: string): Promise<any[]> {
     return new Promise((resolve, reject) => {
-        fetch(apiUrl + "/blog/post")
+        fetch(`${apiUrl}/blog/post/${id}`)
             .then((res) => res.json())
+            .then((post) => ({ ...post, createdAt: new Date(post.createdAt) }))
             .then(resolve)
             .catch(reject);
     });

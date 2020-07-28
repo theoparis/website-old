@@ -1,20 +1,13 @@
 [build]
 command = "npm run build"
 # functions = "packages/server/dist"
-publish = "packages/client/build"
+publish = "build"
 
 [build.environment]
 NPM_FLAGS = "--prefix=/"
 
 [[redirects]]
-from = "/api/*"
-to = "/.netlify/functions/index"
-status = 200
-force = true
-headers = { X-From = "Netlify" }
-
-[[redirects]]
-from = "/*"
-to = "/index.html"
-status = 200
 force = false
+from = "/*"
+status = 200
+to = "/index.html"

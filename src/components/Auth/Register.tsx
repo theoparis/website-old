@@ -6,11 +6,9 @@ export class Register extends Component<
     any,
     { username: string; password: string }
 > {
-    form: React.MutableRefObject<HTMLFormElement | undefined>;
     constructor(props: any) {
         super(props);
         this.state = { username: "", password: "" };
-        this.form = useRef();
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
