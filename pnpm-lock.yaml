@@ -1,6 +1,7 @@
 importers:
   .:
     dependencies:
+      '@types/dompurify': 2.0.3
       '@types/react': 16.9.43
       '@types/react-bootstrap': 1.0.1
       '@types/react-dom': 16.9.8
@@ -8,6 +9,7 @@ importers:
       animate.css: 4.1.0
       axios: 0.19.2
       bootstrap: 4.5.0
+      dompurify: 2.0.12
       framer-motion: 2.1.2_react-dom@16.13.1+react@16.13.1
       react: 16.13.1
       react-bootstrap: 1.2.2_react-dom@16.13.1+react@16.13.1
@@ -28,6 +30,7 @@ importers:
       ts-node: 8.10.2_typescript@3.9.7
       url-loader: 4.1.0_file-loader@6.0.0
     specifiers:
+      '@types/dompurify': ^2.0.3
       '@types/node': ^14.0.24
       '@types/react': ^16.9.43
       '@types/react-bootstrap': ^1.0.1
@@ -37,6 +40,7 @@ importers:
       axios: ^0.19.2
       bootstrap: ^4.5.0
       css-loader: ^3.6.0
+      dompurify: ^2.0.12
       file-loader: ^6.0.0
       framer-motion: ^2.1.2
       react: ^16.13.1
@@ -1754,6 +1758,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-rr+OQyAjxze7GgWrSaJwydHStIhHq2lvY3BOC2Mj7KnzI7XK0Uw1TOOdI9lDoajEbSWLiYgoo4f1R51erQfhPQ==
+  /@types/dompurify/2.0.3:
+    dependencies:
+      '@types/trusted-types': 1.0.5
+    dev: false
+    resolution:
+      integrity: sha512-sK52Cwj9nJh186Tt/My7WzCWsJlJWAtcUig1fp/7s7/T2t4xMgpNHYdgjXlCUsXpmGc1OZWPqUFpZ35o6xs5lQ==
   /@types/eslint-visitor-keys/1.0.0:
     dev: true
     resolution:
@@ -1856,6 +1866,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-l42BggppR6zLmpfU6fq9HEa2oGPEI8yrSPL3GITjfRInppYFahObbIQOQK3UGxEnyQpltZLaPe75046NOZQikw==
+  /@types/trusted-types/1.0.5:
+    dev: false
+    resolution:
+      integrity: sha512-DimWrx+/wJookaDxe9P/SPoL6drQarRrlp3CwtXAWsbHssXNHCZb5RfRRmdUeGOs81XgZMkqHjyfKufEtvFHtA==
   /@types/warning/3.0.0:
     dev: false
     resolution:
@@ -4345,6 +4359,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-JiK04h0Ht5u/80fdLMCEmV4zkNh2BcoMFBmZ/91WtYZ8qVXSKjiw7fXMgFPnHcSZgOo3XdinHvmnDUeMf5R4wA==
+  /dompurify/2.0.12:
+    dev: false
+    resolution:
+      integrity: sha512-Fl8KseK1imyhErHypFPA8qpq9gPzlsJ/EukA6yk9o0gX23p1TzC+rh9LqNg1qvErRTc0UNMYlKxEGSfSh43NDg==
   /domutils/1.5.1:
     dependencies:
       dom-serializer: 0.1.1

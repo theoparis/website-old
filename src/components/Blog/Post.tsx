@@ -34,7 +34,6 @@ export class Post extends Component<any, { post: any }> {
                                         <div className="card-body">
                                             <h2 className="post-title card-title">
                                                 <a
-                                                    target="_blank"
                                                     rel="noopener noreferrer"
                                                     href={
                                                         "/blog/post/" + post._id

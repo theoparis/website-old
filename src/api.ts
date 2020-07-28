@@ -1,5 +1,5 @@
 import { apiUrl } from "./config";
-
+import { sanitize } from "dompurify";
 export function setUser(user: any) {
     sessionStorage.setItem("user", JSON.stringify(user));
 }
@@ -28,6 +28,18 @@ export async function logout() {
     }
 }
 
+export function sanitizeData(data: {
+    title: string;
+    description: string;
+    content: string;
+}) {
+    // TODO: iterate over Object.keys
+    return {
+        description: sanitize(data.description),
+        content: sanitize(data.content),
+    };
+}
+
 export async function createPost(data: {
     title: string;
     description: string;
@@ -36,7 +48,7 @@ export async function createPost(data: {
     try {
         const result = await fetch(apiUrl + "/blog/post", {
             method: "POST",
-            body: JSON.stringify(data),
+            body: JSON.stringify(sanitizeData(data)),
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",

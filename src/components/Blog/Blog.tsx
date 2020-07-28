@@ -49,7 +49,7 @@ export class Blog extends Component<
                                             type="text"
                                             placeholder="Search query..."
                                             name="search"
-                                            value={this.state.query}
+                                            value={encodeURI(this.state.query)}
                                             onChange={(event) =>
                                                 this.setState({
                                                     query: event.target.value,
@@ -76,7 +76,6 @@ export class Blog extends Component<
                                         <div className="card-body">
                                             <h2 className="post-title card-title">
                                                 <a
-                                                    target="_blank"
                                                     rel="noopener noreferrer"
                                                     href={
                                                         "/blog/post/" + post._id
