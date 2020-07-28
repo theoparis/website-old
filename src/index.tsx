@@ -51,7 +51,7 @@ render(
             <Route exact path="/admin" component={AdminDashboard} />
             <Route exact path="/admin/blog" component={BlogAdmin} />
             <Route exact path="/admin/blog/new" component={CreatePost} />
-            <Route path="/blog" component={Blog} />
+            <Route exact path="/blog" component={Blog} />
             <Route
                 path="/blog/archive/:date"
                 render={(props) => (
