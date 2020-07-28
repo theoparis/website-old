@@ -56,11 +56,7 @@ export class Register extends Component<
                                     onChange={this.handleUsernameChange}
                                     required
                                 />
-                                <Form.Control
-                                    size="sm"
-                                    type="text"
-                                    placeholder="Required"
-                                />
+                                <small placeholder="Required" />
                             </Form.Group>
                             <Form.Group>
                                 <Form.Label>Password:</Form.Label>
@@ -70,11 +66,7 @@ export class Register extends Component<
                                     onChange={this.handlePasswordChange}
                                     required
                                 />{" "}
-                                <Form.Control
-                                    size="sm"
-                                    type="text"
-                                    placeholder="Required"
-                                />
+                                <small placeholder="Required" />
                             </Form.Group>
                             <Form.Control type="submit" value="Register" />
                         </Form>
