@@ -16,6 +16,7 @@ import { Blog } from "./components/Blog/Blog";
 import { Post } from "./components/Blog/Post";
 import { Dashboard } from "./components/Auth/Dashboard";
 import { Register } from "./components/Auth/Register";
+import { Login } from "./components/Auth/Login";
 
 render(
     <BrowserRouter>
@@ -39,21 +40,12 @@ render(
         </Helmet>
         <Header />
         <Switch>
-            <Route exact path="/">
-                <Home />
-            </Route>
-            <Route exact path="/about">
-                <About />
-            </Route>
-            <Route exact path="/projects">
-                <Projects />
-            </Route>
-            <Route exact path="/dashboard">
-                <Dashboard />
-            </Route>
-            <Route exact path="/register">
-                <Register />
-            </Route>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/about" component={About} />
+            <Route exact path="/projects" component={Projects} />
+            <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
             <Route exact path="/blog" component={Blog} />
             <Route
                 path="/blog/archive/:date"

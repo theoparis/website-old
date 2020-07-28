@@ -1,12 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, FormEvent } from "react";
 import { Form, Container } from "react-bootstrap";
-import { sendRegistrationRequest } from "../../api";
+import { sendLoginRequest } from "../../api";
 
-export class Register extends Component<
+export class Login extends Component<
     any,
     { username: string; password: string }
 > {
-    history: any;
     constructor(props: any) {
         super(props);
         this.state = { username: "", password: "" };
@@ -23,12 +22,14 @@ export class Register extends Component<
         this.setState({ password: e.target.value });
     }
 
-    handleSubmit(event: any) {
+    handleSubmit(event: FormEvent) {
         event.preventDefault();
-        sendRegistrationRequest(this.state.username, this.state.password).then(
+        sendLoginRequest(this.state.username, this.state.password).then(
             (result) => {
+                // console.log(result)
+
                 if (!result.error) this.props.history.push("/dashboard");
-                else this.props.history.push("/register");
+                else this.props.history.push("/login");
             },
         );
     }
@@ -38,28 +39,14 @@ export class Register extends Component<
             <div>
                 <main id="content">
                     <Container>
-                        <h2>Register</h2>
+                        <h2>Login</h2>
                         <Form onSubmit={this.handleSubmit}>
-                            <Form.Group>
-                                <Form.Label>Full Name:</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    name="username"
-                                    onChange={this.handleUsernameChange}
-                                />
-                            </Form.Group>
                             <Form.Group>
                                 <Form.Label>Email:</Form.Label>
                                 <Form.Control
                                     type="text"
                                     name="username"
                                     onChange={this.handleUsernameChange}
-                                    required
-                                />
-                                <Form.Control
-                                    size="sm"
-                                    type="text"
-                                    placeholder="Required"
                                 />
                             </Form.Group>
                             <Form.Group>
@@ -68,15 +55,9 @@ export class Register extends Component<
                                     type="password"
                                     name="password"
                                     onChange={this.handlePasswordChange}
-                                    required
                                 />{" "}
-                                <Form.Control
-                                    size="sm"
-                                    type="text"
-                                    placeholder="Required"
-                                />
                             </Form.Group>
-                            <Form.Control type="submit" value="Register" />
+                            <Form.Control type="submit" value="Log In" />
                         </Form>
                     </Container>
                 </main>

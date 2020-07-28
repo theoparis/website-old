@@ -1,19 +1,75 @@
 import { apiUrl } from "./config";
 
-export let currentUser: any = null;
-
-export function setUser(user: any, token: string) {
-    localStorage.setItem("session", JSON.stringify(token));
-    currentUser = user;
+export function setUser(user: any) {
+    sessionStorage.setItem("user", JSON.stringify(user));
 }
 
-export const isLoggedIn = () => currentUser !== null;
+export function getUser(): any {
+    const item = sessionStorage.getItem("user");
+    if (item) return JSON.parse(item);
+    else return null;
+}
+
+export const isLoggedIn = () => getUser() !== null;
 export const hasRole = (role: string) =>
-    isLoggedIn() ? currentUser.roles.includes(role) : false;
+    isLoggedIn() ? getUser().roles.includes(role) : false;
+
+export async function logout() {
+    try {
+        const response = await fetch(apiUrl + "/auth/logout", {
+            headers: {
+                Accept: "application/json",
+            },
+        });
+        setUser(null);
+        return { response };
+    } catch (error) {
+        return { response: null, error };
+    }
+}
 
 export async function sendLoginRequest(username: string, password: string) {
     try {
         const result = await fetch(apiUrl + "/auth/user", {
+            method: "POST",
+            body: JSON.stringify({
+                username,
+                password,
+            }),
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            credentials: "same-origin",
+        });
+        const json = await result.json();
+        if (result.status === 200) {
+            setUser(json.user);
+            return {
+                error: null,
+                response: result,
+            };
+        } else {
+            setUser(null);
+            return {
+                error: "login error",
+                response: result,
+            };
+        }
+    } catch (e) {
+        console.error(e);
+        return {
+            error: e.message,
+        };
+    }
+}
+
+export async function sendRegistrationRequest(
+    username: string,
+    password: string,
+) {
+    try {
+        const result = await fetch(apiUrl + "/auth/user/create", {
             body: JSON.stringify({
                 username,
                 password,
@@ -22,10 +78,10 @@ export async function sendLoginRequest(username: string, password: string) {
         });
         const json = await result.json();
         if (result.status === 200) {
-            setUser(json.user, json.token);
+            setUser(json.user);
             return "";
         } else {
-            setUser(null, "");
+            setUser(null);
             return "login error";
         }
     } catch (e) {

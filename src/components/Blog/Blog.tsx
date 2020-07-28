@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Container } from "react-bootstrap";
+import { Container, Form } from "react-bootstrap";
 import { getPosts, dateToString } from "../../api";
 
 export class Blog extends Component<
@@ -36,12 +36,11 @@ export class Blog extends Component<
                             <h1 className="page-title">Blog</h1>
                             <p>{this.state.posts.length} Posts</p>
                             <div className="search-container">
-                                <form
+                                <Form
                                     action={"/blog?search=" + this.state.query}
                                 >
-                                    <div className="form-group">
-                                        <input
-                                            className="form-control"
+                                    <Form.Group>
+                                        <Form.Control
                                             type="text"
                                             placeholder="Search query..."
                                             name="search"
@@ -52,16 +51,16 @@ export class Blog extends Component<
                                                 })
                                             }
                                         />
-                                    </div>
-                                    <div className="form-group">
+                                    </Form.Group>
+                                    <Form.Group className="form-group">
                                         <button
                                             className="form-control btn btn-primary"
                                             type="submit"
                                         >
                                             Search
                                         </button>
-                                    </div>
-                                </form>
+                                    </Form.Group>
+                                </Form>
                             </div>
                             <div id="posts">
                                 {this.state.posts.map((post: any) => (
@@ -93,7 +92,9 @@ export class Blog extends Component<
                                                 Created By {post.author} At{" "}
                                                 {dateToString(post.createdAt) +
                                                     " "}
-                                                In {post.category || "Uncategorized"}
+                                                In{" "}
+                                                {post.category ||
+                                                    "Uncategorized"}
                                             </a>
                                             <div className="post-description card-text">
                                                 <p
