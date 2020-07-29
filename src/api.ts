@@ -1,4 +1,4 @@
-import { apiUrl } from "./config";
+import { apiUrl, Errors } from "./config";
 import { sanitize } from "dompurify";
 export function setUser(user: any) {
     sessionStorage.setItem("user", JSON.stringify(user));
@@ -28,16 +28,46 @@ export async function logout() {
     }
 }
 
-export function sanitizeData(data: {
-    title: string;
-    description: string;
-    content: string;
-}) {
-    // TODO: iterate over Object.keys
-    return {
-        description: sanitize(data.description),
-        content: sanitize(data.content),
-    };
+export const sanitizeData = (data: any) =>
+    Object.values(data).map((v) => (typeof v === "string" ? sanitize(v) : v));
+
+export async function deletePost(data: { title: string }) {
+    try {
+        const result = await fetch(apiUrl + "/blog/post", {
+            method: "POST",
+            body: JSON.stringify(sanitizeData(data)),
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            credentials: "include",
+        });
+        const json = await result.json();
+        if (result.status === 200) {
+            return {
+                error: null,
+                response: result,
+                json,
+            };
+        } else if (result.status === 401) {
+            return {
+                error: Errors.AUTHENTICATION,
+                response: result,
+                json,
+            };
+        } else {
+            return {
+                error: "Unknown error encountered.",
+                response: result,
+                json,
+            };
+        }
+    } catch (e) {
+        console.error(e);
+        return {
+            error: e.message,
+        };
+    }
 }
 
 export async function createPost(data: {
@@ -64,13 +94,13 @@ export async function createPost(data: {
             };
         } else if (result.status === 401) {
             return {
-                error: "authentication error",
+                error: Errors.AUTHENTICATION,
                 response: result,
                 json,
             };
         } else {
             return {
-                error: "other error",
+                error: json.message || json.error,
                 response: result,
                 json,
             };
@@ -85,7 +115,7 @@ export async function createPost(data: {
 
 export async function sendLoginRequest(username: string, password: string) {
     try {
-        const result = await fetch(apiUrl + "/auth/user", {
+        const result = await fetch(apiUrl + "/auth/login", {
             method: "POST",
             body: JSON.stringify({
                 username,
@@ -108,7 +138,7 @@ export async function sendLoginRequest(username: string, password: string) {
         } else {
             setUser(null);
             return {
-                error: "login error",
+                error: Errors.AUTHENTICATION,
                 response: result,
                 json,
             };
@@ -127,7 +157,7 @@ export async function sendRegistrationRequest(data: {
     name?: string;
 }) {
     try {
-        const result = await fetch(apiUrl + "/auth/user/create", {
+        const result = await fetch(apiUrl + "/auth/register", {
             body: JSON.stringify(data),
             headers: {
                 Accept: "application/json",
@@ -142,7 +172,7 @@ export async function sendRegistrationRequest(data: {
             return { error: null, response: result, json };
         } else {
             setUser(null);
-            return { error: "login error", response: result, json };
+            return { error: Errors.AUTHENTICATION, response: result, json };
         }
     } catch (e) {
         console.error(e);

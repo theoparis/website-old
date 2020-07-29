@@ -1,7 +1,8 @@
 import React, { Component, FormEvent } from "react";
-import { Container, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { createPost } from "src/api";
 import { Link } from "react-router-dom";
+import { Errors, errorStore } from "src/config";
 
 export class CreatePost extends Component<
     any,
@@ -36,50 +37,45 @@ export class CreatePost extends Component<
                 this.props.history.push(
                     `/blog/post/${result.json.result.upserted[0]._id}`,
                 );
-            else if (result.error === "authentication error")
+            else if (result.error === Errors.AUTHENTICATION)
                 this.props.history.push("/login");
+            else errorStore.dispatch({ type: "set", error: result.error });
         });
     }
 
     render() {
         return (
-            <main id="content">
-                <Container>
-                    <Form id="create-post" onSubmit={this.onSubmit.bind(this)}>
-                        <Form.Group controlId="title">
-                            <Form.Label>Post Title</Form.Label>
-                            <Form.Control
-                                onChange={this.handleTitleChange.bind(this)}
-                                type="text"
-                                placeholder="Enter post title"
-                            />
-                        </Form.Group>
-                        <Form.Group controlId="description">
-                            <Form.Label>Short Post Description</Form.Label>
-                            <Form.Control
-                                onChange={this.handleDescriptionChange.bind(
-                                    this,
-                                )}
-                                as="textarea"
-                                placeholder="Enter post description"
-                            ></Form.Control>
-                        </Form.Group>
-                        <Form.Group controlId="content">
-                            <Form.Label>Post Content</Form.Label>
-                            <Form.Control
-                                onChange={this.handleContentChange.bind(this)}
-                                as="textarea"
-                                placeholder="Enter post content (can be html)"
-                            />
-                        </Form.Group>
-                        <Form.Control
-                            type="submit"
-                            className="btn btn-primary"
-                            value="Create"
-                        />
-                    </Form>
-                </Container>
-            </main>
+            <Form id="create-post" onSubmit={this.onSubmit.bind(this)}>
+                <Form.Group controlId="title">
+                    <Form.Label>Post Title</Form.Label>
+                    <Form.Control
+                        onChange={this.handleTitleChange.bind(this)}
+                        type="text"
+                        placeholder="Enter post title"
+                    />
+                </Form.Group>
+                <Form.Group controlId="description">
+                    <Form.Label>Short Post Description</Form.Label>
+                    <Form.Control
+                        onChange={this.handleDescriptionChange.bind(this)}
+                        as="textarea"
+                        placeholder="Enter post description"
+                    ></Form.Control>
+                </Form.Group>
+                <Form.Group controlId="content">
+                    <Form.Label>Post Content</Form.Label>
+                    <Form.Control
+                        onChange={this.handleContentChange.bind(this)}
+                        as="textarea"
+                        placeholder="Enter post content (can be html)"
+                    />
+                </Form.Group>
+                <Form.Control
+                    type="submit"
+                    className="btn btn-primary"
+                    value="Create"
+                />
+            </Form>
         );
     }
 }
@@ -88,12 +84,8 @@ export default class BlogAdmin extends Component {
     render() {
         return (
             <div>
-                <main id="content">
-                    <Container>
-                        <h2>Blog Administration Dashboard</h2>
-                        <Link to="/admin/blog/new">New Post</Link>
-                    </Container>
-                </main>
+                <h2>Blog Administration Dashboard</h2>
+                <Link to="/admin/blog/new">New Post</Link>
             </div>
         );
     }

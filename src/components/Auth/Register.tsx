@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Form, Container } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { sendRegistrationRequest } from "../../api";
+import { errorStore } from "src/config";
 
 export class Register extends Component<
     any,
-    { username: string; password: string, name: string }
+    { username: string; password: string; name: string }
 > {
     history: any;
     constructor(props: any) {
@@ -30,56 +31,48 @@ export class Register extends Component<
 
     handleSubmit(event: any) {
         event.preventDefault();
-        sendRegistrationRequest(this.state).then(
-            (result) => {
-                console.log(result)
-                if (!result.error) this.props.history.push("/dashboard");
-                else this.props.history.push("/register");
-            },
-        );
+        sendRegistrationRequest(this.state).then((result) => {
+            console.log(result);
+            if (!result.error) this.props.history.push("/dashboard");
+            else errorStore.dispatch({ type: "set", error: result.error });
+        });
     }
 
     render() {
         return (
             <div>
-                <main id="content">
-                    <Container>
-                        <h2>Register</h2>
-                        <Form onSubmit={this.handleSubmit}>
-                            <Form.Group controlId="name">
-                                <Form.Label>Full Name:</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    name="name"
-                                    onChange={this.handleNameChange}
-                                />
-                            </Form.Group>
-                            <Form.Group controlId="username">
-                                <Form.Label>Email:</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    name="username"
-                                    onChange={this.handleUsernameChange}
-                                    required
-                                />
-                                <small style={{ color: "grey" }}>Required</small>
-                            </Form.Group>
-                            <Form.Group controlId="password">
-                                <Form.Label>Password:</Form.Label>
-                                <Form.Control
-                                    type="password"
-                                    name="password"
-                                    onChange={this.handlePasswordChange}
-                                    required
-                                />{" "}
-                                <small style={{ color: "grey" }}>
-                                    Required
-                                </small>
-                            </Form.Group>
-                            <Form.Control type="submit" value="Register" />
-                        </Form>
-                    </Container>
-                </main>
+                <h2>Register</h2>
+                <Form onSubmit={this.handleSubmit}>
+                    <Form.Group controlId="name">
+                        <Form.Label>Full Name:</Form.Label>
+                        <Form.Control
+                            type="text"
+                            name="name"
+                            onChange={this.handleNameChange}
+                        />
+                    </Form.Group>
+                    <Form.Group controlId="username">
+                        <Form.Label>Email:</Form.Label>
+                        <Form.Control
+                            type="text"
+                            name="username"
+                            onChange={this.handleUsernameChange}
+                            required
+                        />
+                        <small style={{ color: "grey" }}>Required</small>
+                    </Form.Group>
+                    <Form.Group controlId="password">
+                        <Form.Label>Password:</Form.Label>
+                        <Form.Control
+                            type="password"
+                            name="password"
+                            onChange={this.handlePasswordChange}
+                            required
+                        />{" "}
+                        <small style={{ color: "grey" }}>Required</small>
+                    </Form.Group>
+                    <Form.Control type="submit" value="Register" />
+                </Form>
             </div>
         );
     }

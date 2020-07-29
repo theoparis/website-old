@@ -1,6 +1,7 @@
 import React, { Component, FormEvent } from "react";
-import { Form, Container } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { sendLoginRequest } from "../../api";
+import { errorStore } from "src/config";
 
 export class Login extends Component<
     any,
@@ -29,7 +30,7 @@ export class Login extends Component<
                 // console.log(result)
 
                 if (!result.error) this.props.history.push("/dashboard");
-                else this.props.history.push("/login");
+                else errorStore.dispatch({ type: "set", error: result.error });
             },
         );
     }
@@ -37,30 +38,26 @@ export class Login extends Component<
     render() {
         return (
             <div>
-                <main id="content">
-                    <Container>
-                        <h2>Login</h2>
-                        <Form onSubmit={this.handleSubmit}>
-                            <Form.Group>
-                                <Form.Label>Email:</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    name="username"
-                                    onChange={this.handleUsernameChange}
-                                />
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Label>Password:</Form.Label>
-                                <Form.Control
-                                    type="password"
-                                    name="password"
-                                    onChange={this.handlePasswordChange}
-                                />{" "}
-                            </Form.Group>
-                            <Form.Control type="submit" value="Log In" />
-                        </Form>
-                    </Container>
-                </main>
+                <h2>Login</h2>
+                <Form onSubmit={this.handleSubmit}>
+                    <Form.Group>
+                        <Form.Label>Email:</Form.Label>
+                        <Form.Control
+                            type="text"
+                            name="username"
+                            onChange={this.handleUsernameChange}
+                        />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Password:</Form.Label>
+                        <Form.Control
+                            type="password"
+                            name="password"
+                            onChange={this.handlePasswordChange}
+                        />{" "}
+                    </Form.Group>
+                    <Form.Control type="submit" value="Log In" />
+                </Form>
             </div>
         );
     }

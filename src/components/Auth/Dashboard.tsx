@@ -1,7 +1,7 @@
 import React, { Component, FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { isLoggedIn, getUser, hasRole, logout } from "../../api";
-import { Container, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 const mbStyle = {
     display: "block",
@@ -28,49 +28,44 @@ export class Dashboard extends Component<any, { user: any }> {
     render() {
         return (
             <div>
-                <main id="content">
-                    <Container>
-                        {isLoggedIn() ? (
-                            <div className="dashboard">
-                                <h3 style={mbStyle}>
-                                    Welcome,{" "}
-                                    {getUser().name || getUser().username}.
-                                </h3>
-                                {hasRole("admin") ? (
-                                    <Link style={mbStyle} to="/admin">
-                                        Admin Dashboard
-                                    </Link>
-                                ) : (
-                                    <div />
-                                )}
-                                {hasRole("writer") ? (
-                                    <Link style={mbStyle} to="/admin/blog">
-                                        Blog Administration Dashboard
-                                    </Link>
-                                ) : (
-                                    <div />
-                                )}
-                                <Form onSubmit={this.logOut.bind(this)}>
-                                    <Form.Group>
-                                        <button
-                                            className="form-control btn btn-primary"
-                                            type="submit"
-                                        >
-                                            Log Out
-                                        </button>
-                                    </Form.Group>
-                                </Form>
-                            </div>
+                {isLoggedIn() ? (
+                    <div className="dashboard">
+                        <h3 style={mbStyle}>
+                            Welcome, {getUser().name || getUser().username}.
+                        </h3>
+                        {hasRole("admin") ? (
+                            <Link style={mbStyle} to="/admin">
+                                Admin Dashboard
+                            </Link>
                         ) : (
-                            <div>
-                                <Link to="/login">Login</Link>
-                                <br />
-                                <Link to="/register">Register</Link>
-                                <br />
-                            </div>
+                            <div />
                         )}
-                    </Container>
-                </main>
+                        {hasRole("writer") ? (
+                            <Link style={mbStyle} to="/admin/blog">
+                                Blog Administration Dashboard
+                            </Link>
+                        ) : (
+                            <div />
+                        )}
+                        <Form onSubmit={this.logOut.bind(this)}>
+                            <Form.Group>
+                                <button
+                                    className="form-control btn btn-primary"
+                                    type="submit"
+                                >
+                                    Log Out
+                                </button>
+                            </Form.Group>
+                        </Form>
+                    </div>
+                ) : (
+                    <div>
+                        <Link to="/login">Login</Link>
+                        <br />
+                        <Link to="/register">Register</Link>
+                        <br />
+                    </div>
+                )}
             </div>
         );
     }

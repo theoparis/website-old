@@ -1,9 +1,9 @@
 #about-me {
-	position: relative;
-	height: auto;
+    position: relative;
+    height: auto;
     display: flex;
     flex-direction: column;
-	justify-content: center;
+    justify-content: center;
 }
 
 #about-me p {
@@ -13,7 +13,7 @@
 }
 
 .about-image {
-	height: auto;
-	min-width: 100px;
-	max-width: 250px;
+    height: auto;
+    min-width: 100px;
+    max-width: 250px;
 }

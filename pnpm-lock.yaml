@@ -5,6 +5,7 @@ importers:
       '@types/react': 16.9.43
       '@types/react-bootstrap': 1.0.1
       '@types/react-dom': 16.9.8
+      '@types/react-helmet': 6.0.0
       '@types/react-router-dom': 5.1.5
       animate.css: 4.1.0
       axios: 0.19.2
@@ -17,6 +18,7 @@ importers:
       react-feather: 2.0.8_react@16.13.1
       react-helmet: 6.1.0_react@16.13.1
       react-router-dom: 5.2.0_react@16.13.1
+      redux: 4.0.5
       typescript: 3.9.7
     devDependencies:
       '@types/node': 14.0.24
@@ -35,6 +37,7 @@ importers:
       '@types/react': ^16.9.43
       '@types/react-bootstrap': ^1.0.1
       '@types/react-dom': ^16.9.8
+      '@types/react-helmet': ^6.0.0
       '@types/react-router-dom': ^5.1.5
       animate.css: ^4.1.0
       axios: ^0.19.2
@@ -51,6 +54,7 @@ importers:
       react-router-dom: ^5.2.0
       react-scripts: ^3.4.1
       react-snap: ^1.23.0
+      redux: ^4.0.5
       serve: ^11.3.2
       style-loader: ^1.2.1
       ts-loader: ^8.0.1
@@ -1834,6 +1838,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-ykkPQ+5nFknnlU6lDd947WbQ6TE3NNzbQAkInC2EKY1qeYdTKp7onFusmYZb+ityzx2YviqT6BXSu+LyWWJwcA==
+  /@types/react-helmet/6.0.0:
+    dependencies:
+      '@types/react': 16.9.43
+    dev: false
+    resolution:
+      integrity: sha512-NBMPAxgjpaMooXa51cU1BTgrX6T+hQbMiLm77JhBbfOzPQea3RB5rNpPOD5xGWHIVpGXHd59cltEzIq0qglGcQ==
   /@types/react-router-dom/5.1.5:
     dependencies:
       '@types/history': 4.7.6
@@ -10268,6 +10278,13 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-nRCcW9Sj7NuZwa2XvH9co8NPeXUBhZP7CRKJtU+cS6PW9FpCIFoI5ib0NT1ZrbNuPoRy0ylyCaUL8Gih4LSyFg==
+  /redux/4.0.5:
+    dependencies:
+      loose-envify: 1.4.0
+      symbol-observable: 1.2.0
+    dev: false
+    resolution:
+      integrity: sha512-VSz1uMAH24DM6MF72vcojpYPtrTUu3ByVWfPL1nPfVRb5mZVTve5GnNCUV53QM/BZ66xfWrm0CTWoM+Xlz8V1w==
   /regenerate-unicode-properties/8.2.0:
     dependencies:
       regenerate: 1.4.1
@@ -11533,6 +11550,12 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-yhy/sQYxR5BkC98CY7o31VGsg014AKLEPxdfhora76l36hD9Rdy5NZA/Ocn6yayNPgSamYdtX2rFJdcv07AYVw==
+  /symbol-observable/1.2.0:
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==
   /symbol-tree/3.2.4:
     dev: true
     resolution:
@@ -11858,6 +11881,7 @@ packages:
     resolution:
       integrity: sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
   /typescript/3.9.7:
+    dev: false
     engines:
       node: '>=4.2.0'
     hasBin: true

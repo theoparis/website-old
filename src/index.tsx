@@ -19,6 +19,8 @@ import { Register } from "./components/Auth/Register";
 import { Login } from "./components/Auth/Login";
 import AdminDashboard from "./components/Admin";
 import BlogAdmin, { CreatePost } from "./components/Admin/BlogAdmin";
+import ErrorDialog from "./components/ErrorDialog";
+import { Container } from "react-bootstrap";
 
 render(
     <BrowserRouter>
@@ -41,37 +43,46 @@ render(
             <title>Theo's Website</title>
         </Helmet>
         <Header />
-        <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/about" component={About} />
-            <Route exact path="/projects" component={Projects} />
-            <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/admin" component={AdminDashboard} />
-            <Route exact path="/admin/blog" component={BlogAdmin} />
-            <Route exact path="/admin/blog/new" component={CreatePost} />
-            <Route exact path="/blog" component={Blog} />
-            <Route
-                path="/blog/archive/:date"
-                render={(props) => (
-                    <Blog
-                        location={props.location}
-                        archiveFilter={props.match.params.date}
+        <main id="content">
+            <Container>
+                <ErrorDialog />
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/about" component={About} />
+                    <Route exact path="/projects" component={Projects} />
+                    <Route exact path="/dashboard" component={Dashboard} />
+                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/register" component={Register} />
+                    <Route exact path="/admin" component={AdminDashboard} />
+                    <Route exact path="/admin/blog" component={BlogAdmin} />
+                    <Route
+                        exact
+                        path="/admin/blog/new"
+                        component={CreatePost}
                     />
-                )}
-            />
-            <Route
-                path="/blog/category/:category"
-                render={(props) => (
-                    <Blog
-                        location={props.location}
-                        category={props.match.params.category}
+                    <Route exact path="/blog" component={Blog} />
+                    <Route
+                        path="/blog/archive/:date"
+                        render={(props) => (
+                            <Blog
+                                location={props.location}
+                                archiveFilter={props.match.params.date}
+                            />
+                        )}
                     />
-                )}
-            />
-            <Route path="/blog/post/:id" component={Post} />
-        </Switch>
+                    <Route
+                        path="/blog/category/:category"
+                        render={(props) => (
+                            <Blog
+                                location={props.location}
+                                category={props.match.params.category}
+                            />
+                        )}
+                    />
+                    <Route path="/blog/post/:id" component={Post} />
+                </Switch>
+            </Container>
+        </main>
         <Footer />
     </BrowserRouter>,
     document.getElementById("root"),
