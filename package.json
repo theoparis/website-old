@@ -21,7 +21,7 @@
         "react-helmet": "^6.1.0",
         "react-router-dom": "^5.2.0",
         "redux": "^4.0.5",
-        "typescript": "^3.9.7"
+        "@types/node": "^14.0.27"
     },
     "scripts": {
         "start": "BROWSER=none react-scripts start",
@@ -43,7 +43,6 @@
         ]
     },
     "devDependencies": {
-        "@types/node": "^14.0.27",
         "css-loader": "^4.1.0",
         "file-loader": "^6.0.0",
         "react-scripts": "^3.4.1",
@@ -52,6 +51,7 @@
         "style-loader": "^1.2.1",
         "ts-loader": "^8.0.1",
         "ts-node": "^8.10.2",
-        "url-loader": "^4.1.0"
+        "url-loader": "^4.1.0",
+        "typescript": "^3.9.7"
     }
 }
