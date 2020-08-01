@@ -27,9 +27,6 @@
         "start": "BROWSER=none react-scripts start",
         "build": "CI= react-scripts build"
     },
-    "reactSnap": {
-        "asyncScriptTags": true
-    },
     "browserslist": {
         "production": [
             ">0.2%",
@@ -46,7 +43,6 @@
         "css-loader": "^4.1.0",
         "file-loader": "^6.0.0",
         "react-scripts": "^3.4.1",
-        "react-snap": "^1.23.0",
         "serve": "^11.3.2",
         "style-loader": "^1.2.1",
         "ts-loader": "^8.0.1",
