@@ -4,15 +4,9 @@
     position: relative;
     background-image: url("/assets/MeBanner.png");
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     background-attachment: scroll;
     background-position: center;
     color: white;
     margin-bottom: 25px;
-}
-
-@media (max-width: 768px) {
-    .showcase-banner {
-        height: 250px;
-    }
 }
