@@ -1,5 +1,5 @@
 body {
-    background-color: #555;
+    background-color: #2e2e2e;
     color: #fff;
     margin: 0;
     padding: 0;
@@ -8,7 +8,7 @@ body {
 
 .red-text {
     color: #00bfff;
-    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+    text-shadow: 2px 0 0 #040404, 0 -2px 0 #040404, 0 2px 0 #040404, -2px 0 0 #040404;
 }
 
 .active {
@@ -21,7 +21,7 @@ main h2 {
 
 .page-title {
     color: #00bfff;
-    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+    text-shadow: 2px 0 0 #040404, 0 -2px 0 #040404, 0 2px 0 #040404, -2px 0 0 #040404;
     font-weight: 700;
 }
 
@@ -342,7 +342,7 @@ footer {
     bottom: 0;
     left: 0;
     position: relative;
-    background-color: #09c;
+    background-color: #232323;
     height: 50px;
     width: 100%;
 }

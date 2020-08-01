@@ -9,7 +9,7 @@ const styles = {
         fontSize: 24,
         flex: 1,
         color: "#00bfff",
-        textShadow: "1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000",
+        textShadow: "2px 0 0 #040404, 0 -2px 0 #040404, 0 2px 0 #040404, -2px 0 0 #040404",
         marginRight: 15,
     },
     navbarToggler: {

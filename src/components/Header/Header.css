@@ -3,7 +3,7 @@
 }
 
 header {
-    background-color: #2e2e2e;
+    background-color: #232323;
     z-index: 1;
     overflow: hidden;
     background-size: cover;
@@ -20,7 +20,7 @@ header {
 }
 
 header h1 {
-    color: #3877be;
+    color: #00ffbf;
 }
 
 header nav ul a {
