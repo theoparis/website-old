@@ -37,7 +37,7 @@ render(
             <meta property="og:image" content="/assets/creepinson.png" />
             <meta
                 property="og:description"
-                content="Theo's website and blog made with EJS, CSS, Typescript, and MongoDB from scratch."
+                content="Theo Paris's website and blog made from the scratch with React and Express."
             />
             <meta property="og:url" content="https://theoparis.com/" />
             <title>Theo's Website</title>
