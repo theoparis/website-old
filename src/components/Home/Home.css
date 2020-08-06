@@ -1,6 +1,7 @@
 .showcase-banner {
     height: 350px;
     width: 100%;
+    left: -10px;
     position: relative;
     background-image: url("/assets/MeBanner.png");
     background-repeat: no-repeat;

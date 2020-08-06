@@ -3,16 +3,7 @@ import { motion } from "framer-motion";
 import { useHistory } from "react-router-dom";
 import { getBoxes } from "../../api";
 
-import "./App.css";
-
-/* const bannerStyle = {
-    height: "450px",
-    top: "25px",
-    width: "100%",
-    position: "relative",
-    color: "#fff",
-    marginBottom: "25px",
-}; */
+import "./Home.css";
 
 export function Home() {
     const [boxes, setBoxes] = useState([]);
@@ -26,7 +17,6 @@ export function Home() {
     return (
         <div>
             <div className="showcase-banner" />
-            {/* <Creepinson style={bannerStyle}/> */}
             <section id="showcase">
                 <h1 className="page-title">Hello there.</h1>
                 <p>
