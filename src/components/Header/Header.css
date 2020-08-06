@@ -1,5 +1,21 @@
 .navbar-brand {
+    padding: 0;
+    margin: 0;
     padding-top: 25px;
+}
+
+#branding a {
+    position: relative;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#branding a h1 {
+    color: #00ffbf;
+    font-weight: 700;
+    font-size: calc(2vmin + 24px);
 }
 
 header {
@@ -7,8 +23,6 @@ header {
     z-index: 1;
     overflow: hidden;
     background-size: cover;
-    top: 0;
-    left: 0;
     position: relative;
     height: auto;
     min-height: 120px;
@@ -19,29 +33,24 @@ header {
     border-bottom: #09c 5px solid;
 }
 
-header h1 {
-    color: #00ffbf;
+header .navbar-nav {
+    position: relative;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
-header nav ul a {
+header nav a {
     text-decoration: none;
-    text-transform: uppercase;
-    font-size: 18px;
+    display: flex;
+    flex: 0 auto;
+    font-size: calc(2vmin + 18px);
     font-weight: 700;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-header nav ul a:hover {
-    text-decoration: none;
-    text-transform: uppercase;
-    font-weight: 700;
-}
-
-header nav ul a:active {
-    text-decoration: none;
-    text-transform: uppercase;
-    font-weight: 700;
+    color: #00bfff;
+    text-shadow: 2px 0 0 #040404, 0 -2px 0 #040404, 0 2px 0 #040404,
+        -2px 0 0 #040404;
+    margin-right: calc(2vmin);
 }
 
 header ul {
@@ -52,18 +61,7 @@ header ul {
 
 header li {
     padding: 0 20px;
-    text-align: center;
     list-style-type: none;
-}
-
-.navlink {
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-header nav {
-    position: relative;
-    margin-bottom: 15px;
 }
 
 .navbar-toggle {

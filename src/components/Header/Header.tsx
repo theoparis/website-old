@@ -4,59 +4,29 @@ import { Nav } from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 
-const styles = {
-    navLink: {
-        fontSize: 24,
-        flex: 1,
-        color: "#00bfff",
-        textShadow: "2px 0 0 #040404, 0 -2px 0 #040404, 0 2px 0 #040404, -2px 0 0 #040404",
-        marginRight: 15,
-    },
-    navbarToggler: {
-        outline: "none !important",
-        color: "#fff",
-        marginBottom: 5,
-        marginTop: 5,
-        marginRight: 15,
-    },
-};
-
 export class Header extends Component {
     render() {
         return (
             <div>
-                <header className="flex-column text-center">
+                <header>
                     <div id="branding">
                         <Navbar.Brand className="highlight">
-                            <Link
-                                to="/"
-                                style={{ textDecoration: "none" }}
-                            >
+                            <Link to="/">
                                 {" "}
                                 <h1 id="brand-name">Theo Paris Designs</h1>
                             </Link>
                         </Navbar.Brand>
                     </div>
                     <Navbar expand="lg" className="navbar">
-                        <div>
-                            <Nav
-                                className="nav navbar-nav flex-row text-center"
-                                defaultActiveKey="/"
-                            >
-                                <Link style={styles.navLink} to="/about">
-                                    About
-                                </Link>
-                                <Link style={styles.navLink} to="/projects">
-                                    Projects
-                                </Link>
-                                <Link style={styles.navLink} to="/blog">
-                                    Blog
-                                </Link>
-                                <Link style={styles.navLink} to="/dashboard">
-                                    Dashboard
-                                </Link>
-                            </Nav>
-                        </div>
+                        <Nav
+                            className="nav navbar-nav nav-flex"
+                            defaultActiveKey="/"
+                        >
+                            <Link to="/about">About</Link>
+                            <Link to="/projects">Projects</Link>
+                            <Link to="/blog">Blog</Link>
+                            <Link to="/dashboard">Dashboard</Link>
+                        </Nav>
                     </Navbar>
                 </header>
                 <div id="error" style={{ display: "none" }}>
