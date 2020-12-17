@@ -78,14 +78,18 @@ export function About() {
                 If you are looking for a way to contact me, you can email me
                 using{" "}
                 <a
-                    href="mailto:theo@throw-out-error.dev"
+                    href="mailto:theoparisdesigns@gmail.com"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    theo@throw-out-error.dev
+                    theoparisdesigns@gmail.com
                 </a>
                 . You can also contact me through discord with my tag:{" "}
                 <strong>Creepinson#2817</strong>.
+            </p>
+            <h2 className="page-title">Other Information</h2>
+            <p>
+                <a href="/p/workspace">You can find my workspace/setup here.</a>
             </p>
         </div>
     );

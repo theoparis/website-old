@@ -21,6 +21,7 @@ import AdminDashboard from "./components/Admin";
 import BlogAdmin, { CreatePost } from "./components/Admin/BlogAdmin";
 import ErrorDialog from "./components/ErrorDialog";
 import { Container } from "react-bootstrap";
+import { WorkspacePage } from "./pages";
 
 render(
     <BrowserRouter>
@@ -55,6 +56,7 @@ render(
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/admin" component={AdminDashboard} />
                     <Route exact path="/admin/blog" component={BlogAdmin} />
+                    <Route exact path={"/p/workspace"}><WorkspacePage/></Route>
                     <Route
                         exact
                         path="/admin/blog/new"
