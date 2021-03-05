@@ -12,7 +12,6 @@ export class Header extends Component {
                     <div id="branding">
                         <Navbar.Brand className="highlight">
                             <Link to="/">
-                                {" "}
                                 <h1 id="brand-name">Theo Paris Designs</h1>
                             </Link>
                         </Navbar.Brand>
@@ -23,9 +22,6 @@ export class Header extends Component {
                             defaultActiveKey="/"
                         >
                             <Link to="/about">About</Link>
-                            <Link to="/projects">Projects</Link>
-                            <Link to="/blog">Blog</Link>
-                            <Link to="/dashboard">Dashboard</Link>
                         </Nav>
                     </Navbar>
                 </header>

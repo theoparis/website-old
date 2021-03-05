@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useHistory } from "react-router-dom";
-import { getBoxes } from "../../api";
+import { getBoxes, IBox } from "../../api";
 
 import "./Home.css";
 
 export function Home() {
-    const [boxes, setBoxes] = useState([]);
+    const [boxes, setBoxes] = useState<IBox[]>([]);
     const [animated, setAnimated] = useState(false);
 
     useEffect(() => {
@@ -26,7 +26,7 @@ export function Home() {
             </section>
 
             <section id="boxes">
-                {boxes.map((box: any) => (
+                {boxes.map((box: IBox) => (
                     <motion.div
                         key={box.link}
                         className="box"
@@ -38,7 +38,7 @@ export function Home() {
                         transition={{ duration: 1.5 }}
                         onClick={(): void => {
                             setAnimated(true);
-                            setTimeout(() => history.push(box.link), 1500);
+                            setTimeout(() => box.link && history.push(box.link), 1500);
                         }}
                     >
                         <img

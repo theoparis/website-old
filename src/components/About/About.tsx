@@ -1,22 +1,14 @@
 import React from "react";
 import "./About.css";
+import cody2 from "../../assets/cody2.png";
+import theo from "../../assets/theo.png";
 
 export function About() {
     return (
         <div id="about-me">
             <div id="about-me-images">
-                <img
-                    className="about-image"
-                    alt="Theo"
-                    id="theo"
-                    src={"/assets/theo.png"}
-                />
-                <img
-                    className="about-image"
-                    alt="Cody"
-                    id="cody"
-                    src={"/assets/cody2.png"}
-                />
+                <img className="about-image" alt="Theo" id="theo" src={theo} />
+                <img className="about-image" alt="Cody" id="cody" src={cody2} />
             </div>
             <h1 className="page-title">About Me</h1>
             <p>

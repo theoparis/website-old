@@ -3,12 +3,12 @@ import { Toast } from "react-bootstrap";
 import { errorStore } from "src/config";
 
 export default class ErrorDialog extends Component<
-    object,
+    Record<string, unknown>,
     { display: boolean; error: string }
 > {
-    timeout: any = null;
+    timeout?: NodeJS.Timeout = undefined;
 
-    constructor(props: object) {
+    constructor(props: Record<string, unknown>) {
         super(props);
         this.state = {
             display: false,

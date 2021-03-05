@@ -3,11 +3,11 @@
     width: 100%;
     left: -10px;
     position: relative;
-    background-image: url("/assets/MeBanner.png");
     background-repeat: no-repeat;
     background-size: contain;
     background-attachment: scroll;
     background-position: center;
+    background-image: url("../../assets/MeBanner.png");
     color: white;
     margin-bottom: 25px;
 }

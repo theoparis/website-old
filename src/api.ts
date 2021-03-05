@@ -1,186 +1,18 @@
 import { apiUrl, Errors } from "./config";
 import { sanitize } from "dompurify";
-export function setUser(user: any) {
-    sessionStorage.setItem("user", JSON.stringify(user));
-}
-
-export function getUser(): any {
-    const item = sessionStorage.getItem("user");
-    if (item) return JSON.parse(item);
-    else return null;
-}
-
-export const isLoggedIn = () => getUser() !== null;
-export const hasRole = (role: string) =>
-    isLoggedIn() ? getUser().roles.includes(role) : false;
-
-export async function logout() {
-    try {
-        const response = await fetch(apiUrl + "/auth/logout", {
-            headers: {
-                Accept: "application/json",
-            },
-        });
-        setUser(null);
-        return { response };
-    } catch (error) {
-        return { response: null, error };
-    }
-}
 
 export const sanitizeData = (data: any) =>
     Object.values(data).map((v) => (typeof v === "string" ? sanitize(v) : v));
 
-export async function deletePost(data: { title: string }) {
-    try {
-        const result = await fetch(apiUrl + "/blog/post", {
-            method: "POST",
-            body: JSON.stringify(sanitizeData(data)),
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
-            credentials: "include",
-        });
-        const json = await result.json();
-        if (result.status === 200) {
-            return {
-                error: null,
-                response: result,
-                json,
-            };
-        } else if (result.status === 401) {
-            return {
-                error: Errors.AUTHENTICATION,
-                response: result,
-                json,
-            };
-        } else {
-            return {
-                error: "Unknown error encountered.",
-                response: result,
-                json,
-            };
-        }
-    } catch (e) {
-        console.error(e);
-        return {
-            error: e.message,
-        };
-    }
-}
-
-export async function createPost(data: {
+export interface IBox {
+    image: string;
+    imageDescription?: string;
     title: string;
     description: string;
-    content: string;
-}) {
-    try {
-        const result = await fetch(apiUrl + "/blog/post", {
-            method: "POST",
-            body: JSON.stringify(sanitizeData(data)),
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
-            credentials: "include",
-        });
-        const json = await result.json();
-        if (result.status === 201) {
-            return {
-                error: null,
-                response: result,
-                json,
-            };
-        } else if (result.status === 401) {
-            return {
-                error: Errors.AUTHENTICATION,
-                response: result,
-                json,
-            };
-        } else {
-            return {
-                error: json.message || json.error,
-                response: result,
-                json,
-            };
-        }
-    } catch (e) {
-        console.error(e);
-        return {
-            error: e.message,
-        };
-    }
+    link?: string;
 }
 
-export async function sendLoginRequest(username: string, password: string) {
-    try {
-        const result = await fetch(apiUrl + "/auth/login", {
-            method: "POST",
-            body: JSON.stringify({
-                username,
-                password,
-            }),
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
-            credentials: "include",
-        });
-        const json = await result.json();
-        if (result.status === 200) {
-            setUser(json.user);
-            return {
-                error: null,
-                response: result,
-                json,
-            };
-        } else {
-            setUser(null);
-            return {
-                error: Errors.AUTHENTICATION,
-                response: result,
-                json,
-            };
-        }
-    } catch (e) {
-        console.error(e);
-        return {
-            error: e.message,
-        };
-    }
-}
-
-export async function sendRegistrationRequest(data: {
-    username: string;
-    password: string;
-    name?: string;
-}) {
-    try {
-        const result = await fetch(apiUrl + "/auth/register", {
-            body: JSON.stringify(data),
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
-            method: "POST",
-            credentials: "include",
-        });
-        const json = await result.json();
-        if (result.status === 200) {
-            setUser(json.user);
-            return { error: null, response: result, json };
-        } else {
-            setUser(null);
-            return { error: Errors.AUTHENTICATION, response: result, json };
-        }
-    } catch (e) {
-        console.error(e);
-        return { error: e.message };
-    }
-}
-
-export function getBoxes(): any {
+export function getBoxes(): IBox[] {
     // TODO: add api
     return [
         {
@@ -191,40 +23,6 @@ export function getBoxes(): any {
             link: "/about",
         },
     ];
-}
-
-export function getProjects(): Promise<any[]> {
-    return new Promise((resolve, reject) => {
-        fetch(apiUrl + "/projects")
-            .then((res) => res.json())
-            .then(resolve)
-            .catch(reject);
-    });
-}
-
-export function getPosts(opts: {
-    dateFilter?: string;
-    category?: string;
-    query?: string;
-}): Promise<any[]> {
-    const formattedUrl = `${apiUrl}/blog/posts?date=${
-        opts.dateFilter || ""
-    }&category=${opts.category || ""}&search=${opts.query || ""}`;
-
-    return new Promise((resolve, reject) => {
-        console.log(formattedUrl);
-        fetch(formattedUrl)
-            .then((res) => res.json())
-            // Convert date string to js Date class
-            .then((posts) =>
-                posts.map((p: any) => ({
-                    ...p,
-                    createdAt: new Date(p.createdAt),
-                })),
-            )
-            .then(resolve)
-            .catch(reject);
-    });
 }
 
 export function dateToString(dateObj: Date) {
@@ -242,10 +40,11 @@ export function dateToString(dateObj: Date) {
         "November",
         "December",
     ];
-    let month = monthNames[dateObj.getMonth()];
-    let day = String(dateObj.getDate()).padStart(2, "0");
-    let year = dateObj.getFullYear();
-    let output = month + "\n" + day + "," + year;
+    const month = monthNames[dateObj.getMonth()];
+    const day = String(dateObj.getDate()).padStart(2, "0");
+    const year = dateObj.getFullYear();
+    const
+    output = month + "\n" + day + "," + year;
     return output;
 }
 

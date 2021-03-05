@@ -11,14 +11,6 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Header } from "./components/Header/Header";
 import { About } from "./components/About/About";
 import Footer from "./components/Footer";
-import { Projects } from "./components/Projects/Projects";
-import { Blog } from "./components/Blog/Blog";
-import { Post } from "./components/Blog/Post";
-import { Dashboard } from "./components/Auth/Dashboard";
-import { Register } from "./components/Auth/Register";
-import { Login } from "./components/Auth/Login";
-import AdminDashboard from "./components/Admin";
-import BlogAdmin, { CreatePost } from "./components/Admin/BlogAdmin";
 import ErrorDialog from "./components/ErrorDialog";
 import { Container } from "react-bootstrap";
 import { WorkspacePage } from "./pages";
@@ -50,42 +42,13 @@ render(
                 <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/about" component={About} />
-                    <Route exact path="/projects" component={Projects} />
-                    <Route exact path="/dashboard" component={Dashboard} />
-                    <Route exact path="/login" component={Login} />
-                    <Route exact path="/register" component={Register} />
-                    <Route exact path="/admin" component={AdminDashboard} />
-                    <Route exact path="/admin/blog" component={BlogAdmin} />
-                    <Route exact path={"/p/workspace"}><WorkspacePage/></Route>
-                    <Route
-                        exact
-                        path="/admin/blog/new"
-                        component={CreatePost}
-                    />
-                    <Route exact path="/blog" component={Blog} />
-                    <Route
-                        path="/blog/archive/:date"
-                        render={(props) => (
-                            <Blog
-                                location={props.location}
-                                archiveFilter={props.match.params.date}
-                            />
-                        )}
-                    />
-                    <Route
-                        path="/blog/category/:category"
-                        render={(props) => (
-                            <Blog
-                                location={props.location}
-                                category={props.match.params.category}
-                            />
-                        )}
-                    />
-                    <Route path="/blog/post/:id" component={Post} />
+                    <Route exact path={"/p/workspace"}>
+                        <WorkspacePage />
+                    </Route>
                 </Switch>
             </Container>
         </main>
         <Footer />
     </BrowserRouter>,
-    document.getElementById("root"),
+    document.getElementById("root")
 );
