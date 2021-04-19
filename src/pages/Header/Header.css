@@ -12,7 +12,7 @@
     align-items: center;
 }
 
-#branding a h1 {
+#brand-name {
     color: #00ffbf;
     font-weight: 700;
     font-size: calc(2vmin + 24px);

@@ -1,54 +1,61 @@
-import React from "react";
-import { render } from "react-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { render } from "preact";
 import "animate.css/animate.css";
-
 import "./index.css";
 import { Helmet } from "react-helmet";
 
-import { Home } from "./components/Home/Home";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { Header } from "./components/Header/Header";
-import { About } from "./components/About/About";
-import Footer from "./components/Footer";
-import ErrorDialog from "./components/ErrorDialog";
-import { Container } from "react-bootstrap";
-import { WorkspacePage } from "./pages";
+import { Home } from "./pages/Home/Home";
+import { Route } from "wouter";
+import { Header } from "./pages/Header/Header";
+import { About } from "./pages/About/About";
+import { Footer } from "./components/Footer";
+import { ChakraProvider, ColorModeProvider, Flex } from "@chakra-ui/react";
+import { WorkspacePage } from "./pages/workspace";
+import { ToastContainer, toast } from "react-toast";
+import { errorStore, theme } from "./config";
+
+errorStore.subscribe((ctx) => {
+    if (ctx.error && ctx.error !== undefined) toast(ctx.error);
+});
 
 render(
-    <BrowserRouter>
-        <Helmet>
-            <meta charSet="UTF-8" />
-            <meta name="description" content="Theo's Website" />
-            <meta name="keywords" content="Website, About Me, Blog" />
-            <meta name="author" content="Theo Paris" />
-            <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1.0"
-            />
-            <meta property="og:title" content="Theo's Website" />
-            <meta property="og:image" content="/assets/creepinson.png" />
-            <meta
-                property="og:description"
-                content="Theo Paris's website and blog made from the scratch with React and Express."
-            />
-            <meta property="og:url" content="https://theoparis.com/" />
-            <title>Theo's Website</title>
-        </Helmet>
-        <Header />
-        <main id="content">
-            <Container>
-                <ErrorDialog />
-                <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route exact path="/about" component={About} />
-                    <Route exact path={"/p/workspace"}>
-                        <WorkspacePage />
-                    </Route>
-                </Switch>
-            </Container>
-        </main>
-        <Footer />
-    </BrowserRouter>,
-    document.getElementById("root")
+    <ChakraProvider theme={theme}>
+        <ColorModeProvider options={theme.config}>
+            <Helmet>
+                <meta charSet="UTF-8" />
+                <meta name="description" content="Theo's Website" />
+                <meta name="keywords" content="Website, About Me, Blog" />
+                <meta name="author" content="Theo Paris" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1.0"
+                />
+                <meta property="og:title" content="Theo's Website" />
+                <meta property="og:image" content="/assets/creepinson.png" />
+                <meta
+                    property="og:description"
+                    content="Theo Paris's website and blog made from the scratch with React and Express."
+                />
+                <meta property="og:url" content="https://theoparis.com/" />
+                <title>Theo's Website</title>
+            </Helmet>
+            <Header />
+            <Flex
+                id="content"
+                p="2em"
+                mt="1.5em"
+                flexDir="column"
+                justifyContent="center"
+                alignItems="center"
+            >
+                <Route path="/" component={Home} />
+                <Route path="/about" component={About} />
+                <Route path="/p/workspace">
+                    <WorkspacePage />
+                </Route>
+                <ToastContainer />
+            </Flex>
+            <Footer />
+        </ColorModeProvider>
+    </ChakraProvider>,
+    document.querySelector("#root")!
 );

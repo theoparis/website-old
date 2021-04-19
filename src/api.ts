@@ -1,8 +1,7 @@
-import { apiUrl, Errors } from "./config";
-import { sanitize } from "dompurify";
+import { apiUrl } from "./config";
+import creepinson101 from "./assets/creepinson101.png";
 
-export const sanitizeData = (data: any) =>
-    Object.values(data).map((v) => (typeof v === "string" ? sanitize(v) : v));
+// TODO: Throw Out Error Api Package (gitlab)
 
 export interface IBox {
     image: string;
@@ -16,7 +15,7 @@ export function getBoxes(): IBox[] {
     // TODO: add api
     return [
         {
-            image: "/assets/creepinson101.png",
+            image: creepinson101,
             title: "About",
             description:
                 "You can find more about me and my projects here (click me).",
@@ -43,8 +42,7 @@ export function dateToString(dateObj: Date) {
     const month = monthNames[dateObj.getMonth()];
     const day = String(dateObj.getDate()).padStart(2, "0");
     const year = dateObj.getFullYear();
-    const
-    output = month + "\n" + day + "," + year;
+    const output = month + "\n" + day + "," + year;
     return output;
 }
 

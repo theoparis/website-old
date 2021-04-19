@@ -1,6 +1,4 @@
-import React from "react";
-
-export default function Footer() {
+export const Footer = () => {
     return (
         <footer>
             <p>Made By Theo Paris</p>
