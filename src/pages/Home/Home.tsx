@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { useHistory } from "react-router-dom";
-import { getBoxes, IBox } from "../../api";
+import { Flex, Heading, Text, Image } from "@chakra-ui/react";
+import { useLocation } from "wouter";
+import { getBoxes, IBox } from "~/lib/api";
+import { useEffect, useState } from "preact/hooks";
+import Banner from "~/assets/MeBanner.png";
+import { MotionFlex } from "~/components/motion";
 
-import "./Home.css";
-
-export function Home() {
+export const Home = () => {
     const [boxes, setBoxes] = useState<IBox[]>([]);
     const [animated, setAnimated] = useState(false);
 
@@ -13,21 +13,22 @@ export function Home() {
         setBoxes(getBoxes());
     }, []);
 
-    const history = useHistory();
+    const [, setLocation] = useLocation();
+
     return (
-        <div>
-            <div className="showcase-banner" />
-            <section id="showcase">
-                <h1 className="page-title">Hello there.</h1>
-                <p>
+        <Flex flexDir="column" justifyContent="center" alignItems="center">
+            <Image src={Banner} height="16em" mb="1.5em" />
+            <Flex id="showcase">
+                <Heading>Hello there.</Heading>
+                <Text>
                     Welcome to my website! Click on my About Me box link to
                     learn more about me.
-                </p>
-            </section>
+                </Text>
+            </Flex>
 
-            <section id="boxes">
+            <Flex id="boxes">
                 {boxes.map((box: IBox) => (
-                    <motion.div
+                    <MotionFlex
                         key={box.link}
                         className="box"
                         initial={{ scale: 1, rotate: 0 }}
@@ -38,23 +39,29 @@ export function Home() {
                         transition={{ duration: 1.5 }}
                         onClick={(): void => {
                             setAnimated(true);
-                            setTimeout(() => box.link && history.push(box.link), 1500);
+                            setTimeout(
+                                () => box.link && setLocation(box.link),
+                                1500
+                            );
                         }}
                     >
-                        <img
+                        <Image
                             src={box.image}
                             alt={box.imageDescription || "Box Image"}
+                            mb="1em"
                         />
                         {/* <img src="{{ box.iconUrl }}" /> */}
-                        <h3>{box.title}</h3>
-                        <p
+                        <Heading as="h3" fontSize="1em">
+                            {box.title}
+                        </Heading>
+                        <Text
                             dangerouslySetInnerHTML={{
                                 __html: box.description,
                             }}
                         />
-                    </motion.div>
+                    </MotionFlex>
                 ))}
-            </section>
-        </div>
+            </Flex>
+        </Flex>
     );
-}
+};

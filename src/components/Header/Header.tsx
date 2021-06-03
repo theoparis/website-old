@@ -1,43 +1,22 @@
-import React, { Component } from "react";
-import "./Header.css";
-import { Nav } from "react-bootstrap";
-import Navbar from "react-bootstrap/Navbar";
-import { Link } from "react-router-dom";
+import { Link as WLink } from "wouter";
+import { Flex, Heading } from "@chakra-ui/react";
+import { Link } from "~/components/CustomLink";
 
-export class Header extends Component {
-    render() {
-        return (
-            <div>
-                <header>
-                    <div id="branding">
-                        <Navbar.Brand className="highlight">
-                            <Link to="/">
-                                <h1 id="brand-name">Theo Paris Designs</h1>
-                            </Link>
-                        </Navbar.Brand>
-                    </div>
-                    <Navbar expand="lg" className="navbar">
-                        <Nav
-                            className="nav navbar-nav nav-flex"
-                            defaultActiveKey="/"
-                        >
-                            <Link to="/about">About</Link>
-                        </Nav>
-                    </Navbar>
-                </header>
-                <div id="error" style={{ display: "none" }}>
-                    <div className="alert alert-danger alert-dismissible fade show">
-                        <div id="error-message" />
-                        <button
-                            type="button"
-                            className="close"
-                            data-dismiss="alert"
-                        >
-                            &times;
-                        </button>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-}
+export const Header = () => (
+    <Flex
+        flexDir="column"
+        justifyContent="center"
+        alignItems="center"
+        bg="#232323"
+        p="1.5em"
+    >
+        <Heading fontSize="3em">
+            <Link href="/">Theo Paris Designs</Link>
+        </Heading>
+        <Flex flexDir="column" justifyContent="center" alignItems="center">
+            <Link href="/about" fontSize="1.5em">
+                About
+            </Link>
+        </Flex>
+    </Flex>
+);

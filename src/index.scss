@@ -6,6 +6,10 @@ body {
     box-sizing: border-box;
 }
 
+* {
+    font-family: "JetBrains Mono";
+}
+
 .red-text {
     color: #00bfff;
     text-shadow: 2px 0 0 #040404, 0 -2px 0 #040404, 0 2px 0 #040404, -2px 0 0 #040404;
@@ -41,16 +45,6 @@ main {
 
 .card-body a {
     text-decoration: none;
-}
-
-a {
-    color: #48e5c2;
-    font-weight: 700;
-}
-
-a:hover {
-    color: #154cc2;
-    font-weight: 700;
 }
 
 #posts-container .card-subtitle {
@@ -368,9 +362,4 @@ footer p {
     #cody {
         width: 125px;
     }
-}
-
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-        monospace;
 }

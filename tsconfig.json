@@ -1,35 +1,31 @@
 {
-  "compilerOptions": {
-    "sourceMap": true,
-    "noImplicitAny": false,
-    "module": "esnext",
-    "target": "es5",
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable"
-    ],
-    "removeComments": true,
-    "allowSyntheticDefaultImports": true,
-    "jsx": "react-jsx",
-    "allowJs": true,
-    "baseUrl": "./",
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "moduleResolution": "node",
-    "downlevelIteration": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "typeRoots": [
-      "node_modules/@types",
-      "typings"
-    ],
-    "noFallthroughCasesInSwitch": true
-  },
-  "include": [
-    "src"
-  ]
+    "compilerOptions": {
+        "sourceMap": true,
+        "noImplicitAny": false,
+        "module": "esnext",
+        "target": "esnext",
+        "lib": ["esnext", "dom", "dom.iterable"],
+        "removeComments": true,
+        "allowSyntheticDefaultImports": true,
+        "jsx": "preserve",
+        "allowJs": true,
+        "baseUrl": "./",
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "moduleResolution": "node",
+        "downlevelIteration": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "types": ["vite/client"],
+        "paths": {
+            "react": ["node_modules/preact/compat"],
+            "react-dom": ["node_modules/preact/compat"],
+            "~/*": ["src/*"]
+        },
+        "noFallthroughCasesInSwitch": true
+    },
+    "include": ["src"]
 }
