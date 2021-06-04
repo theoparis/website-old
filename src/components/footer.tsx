@@ -4,7 +4,7 @@ import { Section } from "./section";
 export const Footer = () => {
     return (
         <Section
-            pos="static"
+            pos="fixed"
             w="100%"
             p="1.5em"
             as="footer"
