@@ -23,5 +23,30 @@ export const site = {
         config: {
             initialColorMode: "dark",
         },
+        fonts: {
+            heading: "JetBrains Mono",
+            body: "JetBrains Mono",
+        },
+        colors: {
+            bg: {
+                main: "#212121",
+                secondary: "#121212",
+            },
+        },
+        styles: {
+            global: {
+                body: {
+                    margin: 0,
+                    padding: 0,
+                    backgroundColor: "bg.main",
+                },
+                a: {
+                    color: "white",
+                },
+                p: {
+                    color: "white",
+                },
+            },
+        },
     }),
 };

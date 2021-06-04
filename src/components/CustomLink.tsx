@@ -5,16 +5,10 @@ import { Link as WLink } from "wouter";
 import { MotionText } from "./motion";
 
 export const Link = (props: RenderableProps<LinkProps>) => (
-    <MotionText
-        color="white"
-        whileHover={{
-            scale: 0.9,
-        }}
-    >
         <CLink
             as={props.isExternal ? "a" : WLink}
             _hover={{
-                color: "#66ff9e",
+                color: "#fc440f",
             }}
             rel="noopener noreferrer"
             {...props}
@@ -22,5 +16,4 @@ export const Link = (props: RenderableProps<LinkProps>) => (
             {props.children}
             {props.external && <ExternalLinkIcon mx="2px" />}
         </CLink>
-    </MotionText>
 );

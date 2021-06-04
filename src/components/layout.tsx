@@ -3,7 +3,7 @@ import { Home } from "../pages/Home/Home";
 import { Router, Switch, Route } from "wouter";
 import { Header } from "./Header/Header";
 import { About } from "../pages/About/About";
-import { Footer } from "./Footer";
+import { Footer } from "./footer";
 import { ToastContainer } from "react-toastify";
 import { ChakraProvider, ColorModeProvider, Flex } from "@chakra-ui/react";
 import { site } from "../lib/config";
@@ -59,7 +59,7 @@ export const Layout = () => {
                         justifyContent="center"
                         alignItems="center"
                         p="1.5em"
-                        bg="#2e2e2e"
+                        bg="bg.main"
                     >
                         <ToastContainer />
                         <Switch>
