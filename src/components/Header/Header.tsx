@@ -1,43 +1,24 @@
-import React, { Component } from "react";
-import "./Header.css";
-import { Nav } from "react-bootstrap";
-import Navbar from "react-bootstrap/Navbar";
-import { Link } from "react-router-dom";
+import { Link as WLink } from "wouter";
+import { Flex, Heading } from "@chakra-ui/react";
+import { Link } from "~/components/CustomLink";
+import { Section } from "~/components/section";
 
-export class Header extends Component {
-    render() {
-        return (
-            <div>
-                <header>
-                    <div id="branding">
-                        <Navbar.Brand className="highlight">
-                            <Link to="/">
-                                <h1 id="brand-name">Theo Paris Designs</h1>
-                            </Link>
-                        </Navbar.Brand>
-                    </div>
-                    <Navbar expand="lg" className="navbar">
-                        <Nav
-                            className="nav navbar-nav nav-flex"
-                            defaultActiveKey="/"
-                        >
-                            <Link to="/about">About</Link>
-                        </Nav>
-                    </Navbar>
-                </header>
-                <div id="error" style={{ display: "none" }}>
-                    <div className="alert alert-danger alert-dismissible fade show">
-                        <div id="error-message" />
-                        <button
-                            type="button"
-                            className="close"
-                            data-dismiss="alert"
-                        >
-                            &times;
-                        </button>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-}
+export const Header = () => (
+    <Section bg="bg.secondary" p="1.5em" skipMargin>
+        <Heading fontSize="2em" fontWeight="extrabold">
+            <Link href="/" color="#34eb5b">
+                Theo Paris
+            </Link>
+        </Heading>
+        <Flex
+            flexDir="row"
+            justifyContent="center"
+            alignItems="center"
+            width="100%"
+        >
+            <Link href="/about" fontSize="1.25em">
+                About
+            </Link>
+        </Flex>
+    </Section>
+);
