@@ -1,12 +1,13 @@
 import { useHead } from "hoofd";
-import { Home } from "../pages/Home/Home";
+import { HomePage } from "../pages/Home/Home";
 import { Router, Switch, Route } from "wouter";
 import { Header } from "./Header/Header";
-import { About } from "../pages/About/About";
+import { AboutPage } from "../pages/About/About";
 import { Footer } from "./footer";
 import { ToastContainer } from "react-toastify";
 import { ChakraProvider, ColorModeProvider, Flex } from "@chakra-ui/react";
 import { site } from "../lib/config";
+import { WorkspacePage } from "~/pages/Workspace";
 
 export const Layout = () => {
     useHead({
@@ -54,18 +55,19 @@ export const Layout = () => {
                 <Router>
                     <Header />
                     <Flex
-                        id="content"
                         flexDir="column"
                         justifyContent="center"
                         alignItems="center"
                         p="1.5em"
                         bg="bg.main"
+                        id="content"
+                        h="calc(100% - 4em)"
                     >
                         <ToastContainer />
                         <Switch>
-                            <Route path="/" component={Home} />
-                            <Route path="/about" component={About} />
-                            <Route path={"/p/workspace"}></Route>
+                            <Route path="/" component={HomePage} />
+                            <Route path="/about" component={AboutPage} />
+                            <Route path={"/p/workspace"} component={WorkspacePage}></Route>
                         </Switch>
                     </Flex>
                     <Footer />

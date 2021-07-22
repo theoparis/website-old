@@ -6,7 +6,7 @@ import { useEffect, useState } from "preact/hooks";
 import { MotionFlex } from "~/components/motion";
 import { Section } from "~/components/section";
 
-export const Home = () => {
+export const HomePage = () => {
     const [boxes, setBoxes] = useState<IBox[]>([]);
     const [animated, setAnimated] = useState(false);
 
@@ -37,7 +37,6 @@ export const Home = () => {
                         initial={{ scale: 1, rotate: 0 }}
                         animate={{
                             scale: animated ? 0.1 : 1,
-                            rotate: animated ? 360 : 0,
                         }}
                         transition={{ duration: 1.5 }}
                         onClick={(): void => {

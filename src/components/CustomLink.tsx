@@ -8,7 +8,7 @@ export const Link = (props: RenderableProps<LinkProps>) => (
         <CLink
             as={props.isExternal ? "a" : WLink}
             _hover={{
-                color: "#fc440f",
+                color: "#fb5607",
             }}
             rel="noopener noreferrer"
             {...props}

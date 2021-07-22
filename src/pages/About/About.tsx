@@ -1,12 +1,12 @@
-import cody2 from "../../assets/cody2.png";
+// import cody2 from "../../assets/cody2.png";
 import theo from "../../assets/theo.png";
 import { Flex, Heading, Text, Image } from "@chakra-ui/react";
 import { Link } from "~/components/CustomLink";
 
-export const About = () => {
+export const AboutPage = () => {
     return (
         <Flex
-            id="about-me"
+            aria-label="about-me"
             flexDir="column"
             justifyContent="center"
             alignItems="center"
@@ -24,36 +24,27 @@ export const About = () => {
                     alt="Theo"
                     id="theo"
                     src={theo}
-                    height="12.5em"
-                />
-                <Image
-                    className="about-image"
-                    alt="Cody"
-                    id="cody"
-                    height="12.5em"
-                    src={cody2}
+                    width="10rem"
                 />
             </Flex>
-            <Heading mt="0.5em" as="h2">
+            <Heading mt="1em" as="h2" fontSize="1.5em" color="#34aeeb">
                 About Me
             </Heading>
             <Text textAlign="center">
                 My name is Theo. I am 16 years old and I love gaming, producing
-                music, and programming! Some of my favorite video games include
-                Minecraft, ARK: Survival Evolved, Destiny 2, and more. I also
-                make tutorials on YouTube.
+                music, and programming! One of my favorite video games is
+                Minecraft. I also create YouTube videos.
             </Text>
-            <Heading mt="0.5em" as="h2">
+            <Heading mt="1em" as="h2" fontSize="1.5em" color="#34aeeb">
                 Programming
             </Heading>
             <Text textAlign="center">
-                I have been coding for about 4 years, and have worked with
-                many programming languages, such as Javascript, Typescript,
-                Python, HTML + CSS, PHP, and a little bit of C++ and Assembly.
-                Some of the frameworks I have used include React, Express,
-                MongoDB, etc.
+                I have been coding for about 4 years, and have worked with many
+                programming languages, such as Javascript, Typescript, Python,
+                HTML + CSS, PHP. Some of the frameworks I have used include
+                React, Express, Fastify, MongoDB, etc.
             </Text>
-            <Heading mt="0.5em" as="h2">
+            <Heading mt="1em" as="h2" fontSize="1.5em" color="#34aeeb">
                 Social Media
             </Heading>
             <Text textAlign="center">
@@ -89,12 +80,12 @@ export const About = () => {
                     theoparisdesigns@gmail.com
                 </Link>
                 . You can also contact me through discord with my tag:{" "}
-                <strong>Creepinson#2817</strong>.
+                <strong>TheoParis#6969</strong>.
             </Text>
-            <Heading mt="0.5em" as="h2">
+            <Heading mt="1em" as="h2" fontSize="1.5em" color="#34aeeb">
                 Other Information
             </Heading>
-            <Text>
+            <Text textAlign="center">
                 <Link href="/p/workspace">
                     You can find my workspace/setup here.
                 </Link>

@@ -4,10 +4,10 @@ import { Link } from "~/components/CustomLink";
 import { Section } from "~/components/section";
 
 export const Header = () => (
-    <Section bg="bg.secondary" p="1.5em">
+    <Section bg="bg.secondary" p="1.5em" skipMargin>
         <Heading fontSize="2em" fontWeight="extrabold">
-            <Link href="/" color="#29bf12">
-                Theo Paris Designs
+            <Link href="/" color="#34eb5b">
+                Theo Paris
             </Link>
         </Heading>
         <Flex
